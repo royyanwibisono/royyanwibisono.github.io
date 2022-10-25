@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/eltraingraph-r/static/css/main.61a7ed00.css",
+    "main.js": "/eltraingraph-r/static/js/main.98d4a780.js",
+    "index.html": "/eltraingraph-r/index.html",
+    "main.61a7ed00.css.map": "/eltraingraph-r/static/css/main.61a7ed00.css.map",
+    "main.98d4a780.js.map": "/eltraingraph-r/static/js/main.98d4a780.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.61a7ed00.css",
+    "static/js/main.98d4a780.js"
+  ]
+}
