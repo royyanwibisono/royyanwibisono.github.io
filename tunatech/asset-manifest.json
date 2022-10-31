@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/tunatech/static/css/main.23700a3e.css",
+    "main.js": "/tunatech/static/js/main.453c65e2.js",
+    "static/media/crimson-light-01.png": "/tunatech/static/media/crimson-light-01.aefe9ef8ed13ca4f5828.png",
+    "static/media/p4.jpg": "/tunatech/static/media/p4.c669753c6b3cc65a2e64.jpg",
+    "static/media/crimson-base-01.png": "/tunatech/static/media/crimson-base-01.abe50e326f9d01da92fc.png",
+    "static/media/crimson-main-01.png": "/tunatech/static/media/crimson-main-01.f31cbca405445686bc1e.png",
+    "static/media/p5.jpg": "/tunatech/static/media/p5.242ffc77eead8328db5b.jpg",
+    "static/media/p2.jpg": "/tunatech/static/media/p2.bfb020a65d5bd3ea6b6f.jpg",
+    "static/media/p1.jpg": "/tunatech/static/media/p1.7c1c0ea06fa8a2f14968.jpg",
+    "static/media/crimson-pointer.png": "/tunatech/static/media/crimson-pointer.f2fb30efb3bb383d5539.png",
+    "static/media/p6.jpg": "/tunatech/static/media/p6.b9116a2ef76bb635d94a.jpg",
+    "static/media/p3.jpg": "/tunatech/static/media/p3.1badcc1a98447521dbc9.jpg",
+    "static/media/pp.jpg": "/tunatech/static/media/pp.9c65844bcc8623fae39f.jpg",
+    "static/media/crimson-birds-01.png": "/tunatech/static/media/crimson-birds-01.504b239d12697b0ae427.png",
+    "static/media/crimson-cloud2-01.png": "/tunatech/static/media/crimson-cloud2-01.4bdba2f7c5f1d446b6de.png",
+    "static/media/crimson-cloud1-01.png": "/tunatech/static/media/crimson-cloud1-01.b0e5a0732f7559e9e55a.png",
+    "index.html": "/tunatech/index.html",
+    "main.23700a3e.css.map": "/tunatech/static/css/main.23700a3e.css.map",
+    "main.453c65e2.js.map": "/tunatech/static/js/main.453c65e2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.23700a3e.css",
+    "static/js/main.453c65e2.js"
+  ]
+}
