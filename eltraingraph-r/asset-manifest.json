@@ -1,13 +1,11 @@
 {
   "files": {
-    "main.css": "/eltraingraph-r/static/css/main.2a69f624.css",
-    "main.js": "/eltraingraph-r/static/js/main.668e29c9.js",
-    "index.html": "/eltraingraph-r/index.html",
-    "main.2a69f624.css.map": "/eltraingraph-r/static/css/main.2a69f624.css.map",
-    "main.668e29c9.js.map": "/eltraingraph-r/static/js/main.668e29c9.js.map"
+    "main.css": "/eltraingraph-r/static/css/main.9b6b8538.css",
+    "main.js": "/eltraingraph-r/static/js/main.7de01334.js",
+    "index.html": "/eltraingraph-r/index.html"
   },
   "entrypoints": [
-    "static/css/main.2a69f624.css",
-    "static/js/main.668e29c9.js"
+    "static/css/main.9b6b8538.css",
+    "static/js/main.7de01334.js"
   ]
 }
