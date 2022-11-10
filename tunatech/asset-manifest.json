@@ -1,24 +1,28 @@
 {
   "files": {
-    "main.css": "/tunatech/static/css/main.b2908f43.css",
-    "main.js": "/tunatech/static/js/main.1eb7ce16.js",
-    "static/media/eltraingraph.png": "/tunatech/static/media/eltraingraph.93c0cf92d4d2eef2fd23.png",
+    "main.css": "/tunatech/static/css/main.d0d1b9d6.css",
+    "main.js": "/tunatech/static/js/main.cf20e782.js",
     "static/media/Astro.png": "/tunatech/static/media/Astro.e507581ea65bd901208b.png",
+    "static/media/pp.jpg": "/tunatech/static/media/pp.cec1a2468f580b63f48d.jpg",
+    "static/media/tawafclock3.png": "/tunatech/static/media/tawafclock3.42fa009ff26e8f4c94b6.png",
+    "static/media/tawafclock1.png": "/tunatech/static/media/tawafclock1.5ae45ca5271d99c0178f.png",
     "static/media/eltraingraph (1).png": "/tunatech/static/media/eltraingraph (1).689e17d5c84c61ed492f.png",
     "static/media/crimson-light-01.png": "/tunatech/static/media/crimson-light-01.aefe9ef8ed13ca4f5828.png",
+    "static/media/satelite.png": "/tunatech/static/media/satelite.14c195ca0bea9d14e29f.png",
     "static/media/eltraingraph (3).png": "/tunatech/static/media/eltraingraph (3).fafbf9469ece8bef7c7e.png",
+    "static/media/tawafclock2.png": "/tunatech/static/media/tawafclock2.74d89357685b91d24c7b.png",
+    "static/media/stars.png": "/tunatech/static/media/stars.f3046c8af4099bd2dc34.png",
     "static/media/crimson-base-01.png": "/tunatech/static/media/crimson-base-01.abe50e326f9d01da92fc.png",
     "static/media/crimson-main-01.png": "/tunatech/static/media/crimson-main-01.f31cbca405445686bc1e.png",
     "static/media/eltraingraph (2).png": "/tunatech/static/media/eltraingraph (2).fd7a39463c4e42a2457d.png",
     "static/media/crimson-pointer.png": "/tunatech/static/media/crimson-pointer.f2fb30efb3bb383d5539.png",
-    "static/media/pp.jpg": "/tunatech/static/media/pp.9c65844bcc8623fae39f.jpg",
     "static/media/crimson-birds-01.png": "/tunatech/static/media/crimson-birds-01.504b239d12697b0ae427.png",
     "static/media/crimson-cloud2-01.png": "/tunatech/static/media/crimson-cloud2-01.4bdba2f7c5f1d446b6de.png",
     "static/media/crimson-cloud1-01.png": "/tunatech/static/media/crimson-cloud1-01.b0e5a0732f7559e9e55a.png",
     "index.html": "/tunatech/index.html"
   },
   "entrypoints": [
-    "static/css/main.b2908f43.css",
-    "static/js/main.1eb7ce16.js"
+    "static/css/main.d0d1b9d6.css",
+    "static/js/main.cf20e782.js"
   ]
 }
