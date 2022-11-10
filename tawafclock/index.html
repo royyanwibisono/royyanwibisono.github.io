@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+<title>Tawaf Clock</title>
+ 
+<style>
+#fade-in {
+	//height: 0px;
+	//width: 100%;
+	//opacity: 0;
+	//transition: all .75s ease;
+	-webkit-animation-name: slideOut;
+	-webkit-animation-duration: 0.4s;
+	animation-name: slideOut;
+	animation-duration: 0.4s
+}
+
+#fade-in.show {
+	//opacity: 1;
+	//height: 150px;
+	//width: 100%;
+	-webkit-animation-name: slideIn;
+	-webkit-animation-duration: 0.4s;
+	animation-name: slideIn;
+	animation-duration: 0.4s
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+	font-size: small;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 9px;
+}
+
+tr:nth-child(odd) {
+	background-color: #333;
+	color:#79ff4d;
+}
+tr:nth-child(even) {
+	background-color: #777;
+}
+.buttons {
+	right:5px; 
+	bottom:5px;
+	text-align: right;
+}
+
+.btn {
+	padding: 7px 12px; /* Add some padding */
+	text-align: center;
+	cursor: pointer;
+	outline: none;
+	color: #fff;
+	background-color: #57af4c;
+	border: none;
+	border-radius: 4px;
+	box-shadow: 0px 4px #444;
+}
+.btn:hover {
+	background: #57cf4c;
+}
+
+.toaster {
+	padding: 14px 16px; /* Add some padding */
+	background-color: #777; 
+	color: #79ff4d;
+}
+.toaster:hover {
+	background: #6a6a6a;
+}
+
+.btn:active {
+	box-shadow: 0 0px #000;
+	transform: translateY(4px);
+}
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	//-webkit-animation-name: fadeIn; /* Fade in the background */
+	//-webkit-animation-duration: 0.4s;
+	//animation-name: fadeIn;
+	//animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+	display: none; /* Hidden by default */
+	font-family: monospace;
+	position: fixed;
+	bottom: 0;
+	color: white;
+	background-color: #666;
+	margin: auto;
+	overflow: auto;
+	max-height: 100%;
+	
+	width: 96%;			/* 96+2+2 */
+	padding-left:2%;
+	padding-right:2%;
+	
+}
+
+/* The Close Button */
+.close {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: #ff0000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+	from {bottom: -200px; opacity: 0} 
+	to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes slideOut {
+	from {bottom: 0; opacity: 1} 
+	to {bottom: -200; opacity: 0}
+}
+
+@keyframes slideOut {
+	from {bottom: 0; opacity: 1}
+	to {bottom: -300px; opacity: 0}
+}
+
+@keyframes slideIn {
+	from {bottom: -300px; opacity: 0}
+	to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeOut {
+	from {opacity: 1} 
+	to {opacity: 0}
+}
+
+@-webkit-keyframes fadeIn {
+	from {opacity: 0} 
+	to {opacity: 1}
+}
+
+@keyframes fadeOut {
+	from {opacity: 1} 
+	to {opacity: 0}
+}
+
+@keyframes fadeIn {
+	from {opacity: 0} 
+	to {opacity: 1}
+}
+
+#current-time {
+	display: block;
+	text-align: right;
+	width: 90%;
+	padding-top: 11px;
+	
+}
+
+#jadwal_sholat {
+	display: none;
+	text-align: center;
+	width: 100%;
+}
+
+#place-holder {
+	display: block;
+	text-align: center;
+	width: 100%;
+}
+ 
+#clock {
+	border:2px solid #ffffff;
+}
+
+#clock:hover,
+#clock:focus {
+	border:2px solid #999;
+	cursor: pointer;
+}
+
+body {
+	font-family: "Lato", sans-serif;
+}
+	
+</style>
+</head>
+ 
+<body>
+<div id="place-holder"></div>
+<div id="jadwal_sholat">...</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div id="fade-in" class="modal-content">
+    <span class="close">&times;</span>
+	<div id="current-time">12:00:00 AM</div>
+	<div id="msg-body">
+		<p>Some text in the Modal..</p>
+	</div>
+  </div>
+</div>
+
+<script>
+/*
+RainbowVis-JS 
+Released under Eclipse Public License - v 1.0
+*/
+
+function Rainbow()
+{
+	"use strict";
+	var gradients = null;
+	var minNum = 0;
+	var maxNum = 100;
+	var colours = ['ff0000', 'ffff00', '00ff00', '0000ff']; 
+	setColours(colours);
+	
+	function setColours (spectrum) 
+	{
+		if (spectrum.length < 2) {
+			throw new Error('Rainbow must have two or more colours.');
+		} else {
+			var increment = (maxNum - minNum)/(spectrum.length - 1);
+			var firstGradient = new ColourGradient();
+			firstGradient.setGradient(spectrum[0], spectrum[1]);
+			firstGradient.setNumberRange(minNum, minNum + increment);
+			gradients = [ firstGradient ];
+			
+			for (var i = 1; i < spectrum.length - 1; i++) {
+				var colourGradient = new ColourGradient();
+				colourGradient.setGradient(spectrum[i], spectrum[i + 1]);
+				colourGradient.setNumberRange(minNum + increment * i, minNum + increment * (i + 1)); 
+				gradients[i] = colourGradient; 
+			}
+
+			colours = spectrum;
+		}
+	}
+
+	this.setSpectrum = function () 
+	{
+		setColours(arguments);
+		return this;
+	}
+
+	this.setSpectrumByArray = function (array)
+	{
+		setColours(array);
+		return this;
+	}
+
+	this.colourAt = function (number)
+	{
+		if (isNaN(number)) {
+			throw new TypeError(number + ' is not a number');
+		} else if (gradients.length === 1) {
+			return gradients[0].colourAt(number);
+		} else {
+			var segment = (maxNum - minNum)/(gradients.length);
+			var index = Math.min(Math.floor((Math.max(number, minNum) - minNum)/segment), gradients.length - 1);
+			return gradients[index].colourAt(number);
+		}
+	}
+
+	this.colorAt = this.colourAt;
+
+	this.setNumberRange = function (minNumber, maxNumber)
+	{
+		if (maxNumber > minNumber) {
+			minNum = minNumber;
+			maxNum = maxNumber;
+			setColours(colours);
+		} else {
+			throw new RangeError('maxNumber (' + maxNumber + ') is not greater than minNumber (' + minNumber + ')');
+		}
+		return this;
+	}
+}
+
+function ColourGradient() 
+{
+	"use strict";
+	var startColour = 'ff0000';
+	var endColour = '0000ff';
+	var minNum = 0;
+	var maxNum = 100;
+
+	this.setGradient = function (colourStart, colourEnd)
+	{
+		startColour = getHexColour(colourStart);
+		endColour = getHexColour(colourEnd);
+	}
+
+	this.setNumberRange = function (minNumber, maxNumber)
+	{
+		if (maxNumber > minNumber) {
+			minNum = minNumber;
+			maxNum = maxNumber;
+		} else {
+			throw new RangeError('maxNumber (' + maxNumber + ') is not greater than minNumber (' + minNumber + ')');
+		}
+	}
+
+	this.colourAt = function (number)
+	{
+		return calcHex(number, startColour.substring(0,2), endColour.substring(0,2)) 
+			+ calcHex(number, startColour.substring(2,4), endColour.substring(2,4)) 
+			+ calcHex(number, startColour.substring(4,6), endColour.substring(4,6));
+	}
+	
+	function calcHex(number, channelStart_Base16, channelEnd_Base16)
+	{
+		var num = number;
+		if (num < minNum) {
+			num = minNum;
+		}
+		if (num > maxNum) {
+			num = maxNum;
+		} 
+		var numRange = maxNum - minNum;
+		var cStart_Base10 = parseInt(channelStart_Base16, 16);
+		var cEnd_Base10 = parseInt(channelEnd_Base16, 16); 
+		var cPerUnit = (cEnd_Base10 - cStart_Base10)/numRange;
+		var c_Base10 = Math.round(cPerUnit * (num - minNum) + cStart_Base10);
+		return formatHex(c_Base10.toString(16));
+	}
+
+	function formatHex(hex) 
+	{
+		if (hex.length === 1) {
+			return '0' + hex;
+		} else {
+			return hex;
+		}
+	} 
+	
+	function isHexColour(string)
+	{
+		var regex = /^#?[0-9a-fA-F]{6}$/i;
+		return regex.test(string);
+	}
+
+	function getHexColour(string)
+	{
+		if (isHexColour(string)) {
+			return string.substring(string.length - 6, string.length);
+		} else {
+			var name = string.toLowerCase();
+			if (colourNames.hasOwnProperty(name)) {
+				return colourNames[name];
+			}
+			throw new Error(string + ' is not a valid colour.');
+		}
+	}
+	
+	// Extended list of CSS colornames s taken from
+	// http://www.w3.org/TR/css3-color/#svg-color
+	var colourNames = {
+		aliceblue: "F0F8FF",
+		antiquewhite: "FAEBD7",
+		aqua: "00FFFF",
+		aquamarine: "7FFFD4",
+		azure: "F0FFFF",
+		beige: "F5F5DC",
+		bisque: "FFE4C4",
+		black: "000000",
+		blanchedalmond: "FFEBCD",
+		blue: "0000FF",
+		blueviolet: "8A2BE2",
+		brown: "A52A2A",
+		burlywood: "DEB887",
+		cadetblue: "5F9EA0",
+		chartreuse: "7FFF00",
+		chocolate: "D2691E",
+		coral: "FF7F50",
+		cornflowerblue: "6495ED",
+		cornsilk: "FFF8DC",
+		crimson: "DC143C",
+		cyan: "00FFFF",
+		darkblue: "00008B",
+		darkcyan: "008B8B",
+		darkgoldenrod: "B8860B",
+		darkgray: "A9A9A9",
+		darkgreen: "006400",
+		darkgrey: "A9A9A9",
+		darkkhaki: "BDB76B",
+		darkmagenta: "8B008B",
+		darkolivegreen: "556B2F",
+		darkorange: "FF8C00",
+		darkorchid: "9932CC",
+		darkred: "8B0000",
+		darksalmon: "E9967A",
+		darkseagreen: "8FBC8F",
+		darkslateblue: "483D8B",
+		darkslategray: "2F4F4F",
+		darkslategrey: "2F4F4F",
+		darkturquoise: "00CED1",
+		darkviolet: "9400D3",
+		deeppink: "FF1493",
+		deepskyblue: "00BFFF",
+		dimgray: "696969",
+		dimgrey: "696969",
+		dodgerblue: "1E90FF",
+		firebrick: "B22222",
+		floralwhite: "FFFAF0",
+		forestgreen: "228B22",
+		fuchsia: "FF00FF",
+		gainsboro: "DCDCDC",
+		ghostwhite: "F8F8FF",
+		gold: "FFD700",
+		goldenrod: "DAA520",
+		gray: "808080",
+		green: "008000",
+		greenyellow: "ADFF2F",
+		grey: "808080",
+		honeydew: "F0FFF0",
+		hotpink: "FF69B4",
+		indianred: "CD5C5C",
+		indigo: "4B0082",
+		ivory: "FFFFF0",
+		khaki: "F0E68C",
+		lavender: "E6E6FA",
+		lavenderblush: "FFF0F5",
+		lawngreen: "7CFC00",
+		lemonchiffon: "FFFACD",
+		lightblue: "ADD8E6",
+		lightcoral: "F08080",
+		lightcyan: "E0FFFF",
+		lightgoldenrodyellow: "FAFAD2",
+		lightgray: "D3D3D3",
+		lightgreen: "90EE90",
+		lightgrey: "D3D3D3",
+		lightpink: "FFB6C1",
+		lightsalmon: "FFA07A",
+		lightseagreen: "20B2AA",
+		lightskyblue: "87CEFA",
+		lightslategray: "778899",
+		lightslategrey: "778899",
+		lightsteelblue: "B0C4DE",
+		lightyellow: "FFFFE0",
+		lime: "00FF00",
+		limegreen: "32CD32",
+		linen: "FAF0E6",
+		magenta: "FF00FF",
+		maroon: "800000",
+		mediumaquamarine: "66CDAA",
+		mediumblue: "0000CD",
+		mediumorchid: "BA55D3",
+		mediumpurple: "9370DB",
+		mediumseagreen: "3CB371",
+		mediumslateblue: "7B68EE",
+		mediumspringgreen: "00FA9A",
+		mediumturquoise: "48D1CC",
+		mediumvioletred: "C71585",
+		midnightblue: "191970",
+		mintcream: "F5FFFA",
+		mistyrose: "FFE4E1",
+		moccasin: "FFE4B5",
+		navajowhite: "FFDEAD",
+		navy: "000080",
+		oldlace: "FDF5E6",
+		olive: "808000",
+		olivedrab: "6B8E23",
+		orange: "FFA500",
+		orangered: "FF4500",
+		orchid: "DA70D6",
+		palegoldenrod: "EEE8AA",
+		palegreen: "98FB98",
+		paleturquoise: "AFEEEE",
+		palevioletred: "DB7093",
+		papayawhip: "FFEFD5",
+		peachpuff: "FFDAB9",
+		peru: "CD853F",
+		pink: "FFC0CB",
+		plum: "DDA0DD",
+		powderblue: "B0E0E6",
+		purple: "800080",
+		red: "FF0000",
+		rosybrown: "BC8F8F",
+		royalblue: "4169E1",
+		saddlebrown: "8B4513",
+		salmon: "FA8072",
+		sandybrown: "F4A460",
+		seagreen: "2E8B57",
+		seashell: "FFF5EE",
+		sienna: "A0522D",
+		silver: "C0C0C0",
+		skyblue: "87CEEB",
+		slateblue: "6A5ACD",
+		slategray: "708090",
+		slategrey: "708090",
+		snow: "FFFAFA",
+		springgreen: "00FF7F",
+		steelblue: "4682B4",
+		tan: "D2B48C",
+		teal: "008080",
+		thistle: "D8BFD8",
+		tomato: "FF6347",
+		turquoise: "40E0D0",
+		violet: "EE82EE",
+		wheat: "F5DEB3",
+		white: "FFFFFF",
+		whitesmoke: "F5F5F5",
+		yellow: "FFFF00",
+		yellowgreen: "9ACD32"
+	}
+}
+
+if (typeof module !== 'undefined') {
+  module.exports = Rainbow;
+}
+</script>
+<script>
+	document.addEventListener('DOMContentLoaded', startTimer);
+	
+	var Lokasi = [-6.965555556,107.5927778];
+	var Ketinggian = 100; // in meter
+	var GMT = 7;
+	var SudutSubuh = 20; //(15-20)
+	var SudutIsya = 18; //(15-20)
+	var timeConst = 1.15740740741E-05;
+	var Side = window.innerWidth <= window.innerHeight ? window.innerWidth : window.innerHeight;
+	Side = Side >= 300 ? Side : 300;
+	Side -= 24;
+	var ToasterTime = -1;
+	var ToasterTimeLimit = 17;//second
+	var GmapReady = 0;
+	
+	var JadwalSholat = {};
+	var Markers = [];
+	
+	var coLib = {};
+	coLib['t00'] = '#000000';
+	coLib['t01'] = '#00173a';
+	coLib['t02'] = '#002967';
+	coLib['t03'] = '#003686';
+	coLib['t04'] = '#003d99';
+	coLib['t05'] = '#0045ad';
+	coLib['t06'] = '#0055c6';
+	coLib['t07'] = '#0080ff';
+	coLib['t08'] = '#26b9ff';
+	coLib['t09'] = '#4de6cc';
+	coLib['t10'] = '#5df6cc';
+	coLib['t11'] = '#8cff8c';
+	coLib['t12'] = '#ffff66';
+	coLib['t13'] = '#fff5b3';
+	coLib['t14'] = '#ffe699';
+	coLib['t15'] = '#ffbc4c';
+	coLib['t16'] = '#ff6600';
+	coLib['t17'] = '#ec1900';
+	coLib['t18'] = '#a00000';
+	coLib['t19'] = '#660000';
+	coLib['t20'] = '#530000';
+	coLib['t21'] = '#4d0000';
+	coLib['t22'] = '#3a0000';
+	coLib['t23'] = '#1d0000';
+	
+	document.querySelector("#place-holder").innerHTML = '<canvas id="clock" width="'+Side+'" height="'+Side+'">If you can see this message, your browser does not support canvas and needs an update. Sorry. :(</canvas>'
+
+	document.getElementById("place-holder").addEventListener("click", 
+							function() {
+								var myTable = '<table><tr>'+
+											   '<th>Dzuhur</th>'+
+											   '<th>Ashar</th>'+
+											   '<th>Maghrib</th>'+
+											   '<th>Isya</th>'+
+											   '<th>Shubuh</th>'+
+											   '<th>Sunrise</th></tr>';
+								if (JadwalSholat.data){
+									myTable += '<tr>'+
+											   '<th>'+JadwalSholat.data.Dzuhur+'</th>'+
+											   '<th>'+JadwalSholat.data.Ashar+'</th>'+
+											   '<th>'+JadwalSholat.data.Maghrib+'</th>'+
+											   '<th>'+JadwalSholat.data.Isya+'</th>'+
+											   '<th>'+JadwalSholat.data.Shubuh+'</th>'+
+											   '<th>'+JadwalSholat.data.Terbit+'</th></tr><table>';
+								}
+								showToaster('<p><h2>Your Current Configuration</h2></p>'+
+											'<p>Latitude : '+Lokasi[0]+'<br/>'+
+											'Longitude : '+Lokasi[1]+'<br/>'+
+											'Altitude : '+Ketinggian+' meter<br/>'+
+											'GMT : '+GMT+'<br/>'+
+											'</p>'+myTable+
+											'<p class="buttons"><button class="btn toaster" onclick="displayToasterMap()"><b>MANUALLY SET MY LOCATION</b></button></p>', 20);
+							}); 
+	// Get the modal
+	var modal = document.getElementById('myModal');
+	var modalContent = document.getElementById('fade-in');
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+		fade();
+	}
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			fade();
+		}
+	}
+	
+	var getJSON = function(url, callback) {
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', url, true);
+		xhr.withCredentials = true;
+		xhr.responseType = 'json';
+		xhr.onload = function() {
+		  var status = xhr.status;
+		  if (status === 200) {
+			callback(null, xhr.response);
+		  } else {
+			callback(status, xhr.response);
+		  }
+		};
+		xhr.send();
+	};
+	
+	function getTimeZone() {
+	  var offset = new Date().getTimezoneOffset(), o = Math.abs(offset);
+	  return /*(offset < 0 ? "+" : "-") + ("00" + */Math.floor(o / 60);//).slice(-2) + ":" + ("00" + (o % 60)).slice(-2);
+   	// getJSON('https://maps.googleapis.com/maps/api/timezone/json?location='+Lokasi[0]+','+Lokasi[1]+'&timestamp=1458000000&key=AIzaSyAFL-PkkvMDutg6s7MjY7xBHWywN0EDO3s',
+   	// 	function(err, data) {
+   	//   if (err !== null) {
+   	// 	alert('Something went wrong: ' + err);
+   	//   } else {
+   	// 	alert('Your query count: ' + data.query.count);
+   	//   }
+   	// });
+	}
+
+	
+	function processNewLoc(lat,lng,alt){
+		fade();
+		
+		var position = {"coords":{"latitude":null,"longitude":null,"altitude":null}};
+
+		if(isNaN(lat)){
+			return;
+		}else{
+			position.coords.latitude = lat;
+		}
+
+		if(isNaN(lng)){
+			return;
+		}else{
+			position.coords.longitude = lng;
+		}
+		
+		if(isNaN(alt)){
+			return;
+		}else{
+			position.coords.altitude = alt;
+		}
+
+		showPosition(position);
+	}
+	
+	function displayToasterMap(){
+		if (GmapReady){
+			showToaster('<h2>Select Your Location</h2>'+
+						'<div id="googleMap" style="width:100%;height:'+Side+'px;color:#000;"></div>',(30*60)); //30 minute
+			var mapProp= {
+							center:new google.maps.LatLng(Lokasi[0],Lokasi[1]),
+							zoom:11,
+							//panControl: true,
+							//zoomControl: true,
+							//mapTypeControl: true,
+							//scaleControl: true,
+							streetViewControl: false,
+							//overviewMapControl: true,
+							//rotateControl: true,
+							//scrollwheel: false,
+						};
+			var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+			var elevator = new google.maps.ElevationService;
+
+			google.maps.event.addListener(map, 'click', function(event) {
+															displayLocationElevation(map, event.latLng, elevator);
+
+															//placeMarker(map, event.latLng);
+													  });
+		}
+		else{
+			showToaster('<p><h3>Google Map\'s not ready.</h3></p>',20);
+		}
+	}
+	
+	function displayLocationElevation(map, location, elevator) {
+        // Initiate the location request
+        elevator.getElevationForLocations({
+			  'locations': [location]
+			}, function(results, status) {
+			  var elevationMsg = "";
+			  if (status === 'OK') {
+				// Retrieve the first result
+				if (results[0]) {
+				  elevationMsg = (results[0].elevation);
+				} else {
+				  elevationMsg = 0;
+				  console.log('Elevation No results found');
+				}
+			  } else {
+				elevationMsg = 0;
+				console.log('Elevation service failed due to : ' + status);
+			  }
+			  
+			  // Removes the markers from the map, but keeps them in the array.
+			  for (var i = 0; i < Markers.length; i++) {
+				  Markers[i].setMap(null);
+			  }
+			  // Removes the markers
+			  Markers = [];
+
+			  var marker = new google.maps.Marker({
+					position: location,
+					map: map
+			  });
+			  
+			  var infowindow = new google.maps.InfoWindow({
+					content:'<p>Latitude : ' + location.lat() + '<br>Longitude : ' + location.lng()+ '<br>Altitude (m) : ' + elevationMsg +
+							 '<br/></p><p style="text-align: center;"><Button class="btn" onclick="processNewLoc('+location.lat()+','+location.lng()+','+elevationMsg+')"><b>SELECT</b></Button></p>'});
+			 infowindow.open(map,marker);
+			 Markers.push(marker);
+        });
+	}
+
+	
+	function myMap() {
+		GmapReady = 1;
+	}
+	
+	function unfade() {
+		var op = 0.1;  // initial opacity
+		modal.style.display = 'block';
+		modalContent.className = 'modal-content show';
+		var timer = setInterval(function () {
+			if (op >= 1){
+				clearInterval(timer);
+				modalContent.style.display = 'block';
+			}
+			modal.style.opacity = op;
+			modal.style.filter = 'alpha(opacity=' + op * 100 + ")";
+			op += op * 0.5;
+		}, 30);
+	}
+	
+	function fade() {
+		var op = 1;  // initial opacity
+		modalContent.className = 'modal-content';
+		var timer = setInterval(function () {
+			if (op <= 0.25){
+				clearInterval(timer);
+				modal.style.display = 'none';
+				modalContent.style.display = 'none';
+			}
+			modal.style.opacity = op;
+			modal.style.filter = 'alpha(opacity=' + op * 100 + ")";
+			op -= op * 0.25;
+			
+		}, 30);
+		ToasterTime = -1;
+	}
+	
+	function getLocation() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showPosition, showError);
+			return {"status":"success","msg":""};
+		} else { 
+			return {"status":"error","msg":"Geolocation is not supported by this browser."};
+		}
+	}
+
+	function showPosition(position) {
+		Lokasi[0]=position.coords.latitude?position.coords.latitude:Lokasi[0];
+		Lokasi[1]=position.coords.longitude?position.coords.longitude:Lokasi[1];
+		Ketinggian = position.coords.altitude? position.coords.altitude : Ketinggian;
+		GMT = getTimeZone();
+		
+		updateJadwalSholat(new Date());
+		
+		mySettings = {"coords":{"latitude":Lokasi[0],"longitude":Lokasi[1],"altitude":Ketinggian},"timezone":GMT};
+		localStorage['mySettings'] = JSON.stringify(mySettings);
+	}
+
+	function showError(error) {
+		switch(error.code) {
+			case error.PERMISSION_DENIED:
+				showToaster('<p><h3>User denied the request for Geolocation.</h3></p>'
+					+'<p class="buttons"><button class="btn toaster" onclick="displayToasterMap()"><b>MANUALLY SET MY LOCATION</b></button></p>',20);
+				break;
+			case error.POSITION_UNAVAILABLE:
+				showToaster('<p><h3>Location information is unavailable.</h3></p>'
+					+'<p class="buttons"><button class="btn toaster" onclick="displayToasterMap()"><b>MANUALLY SET MY LOCATION</b></button></p>',20);
+				break;
+			case error.TIMEOUT:
+				showToaster('<p><h3>The request to get user location timed out.</h3></p>'
+					+'<p class="buttons"><button class="btn toaster" onclick="displayToasterMap()"><b>MANUALLY SET MY LOCATION</b></button></p>',20);
+				break;
+			case error.UNKNOWN_ERROR:
+				showToaster('<p><h3>An unknown error occurred.</h3></p>'+
+					+'<p class="buttons"><button class="btn toaster" onclick="displayToasterMap()"><b>MANUALLY SET MY LOCATION</b></button></p>',20);
+				break;
+		}
+		
+		updateJadwalSholat(new Date());
+	}
+
+
+	function showToaster(message, sLimit) {
+		document.getElementById("msg-body").innerHTML = message;
+		unfade();
+		ToasterTime = 0;
+		ToasterTimeLimit = sLimit;
+	}
+	
+	function updateJadwalSholat(dateTime){
+		JadwalSholat = hitungWaktuSholat(dateTime);
+		JadwalSholat.dbg += "<br/>Sholat Schedule updated at : "+dateTime.toLocaleString();
+		document.querySelector("#jadwal_sholat").innerHTML = "<pre>"+JSON.stringify(JadwalSholat,undefined, 2) +"</pre>";
+	}
+	
+	function startTimer() {	
+		setInterval(displayTime, 1000);
+		displayTime();
+		
+		var stored = localStorage['mySettings'];
+		if (stored){
+			 mySettings = JSON.parse(stored);
+			 Lokasi = [mySettings.coords.latitude,mySettings.coords.longitude];
+			 Ketinggian = mySettings.coords.altitude;
+			 GMT = mySettings.timezone;
+			 
+			 updateJadwalSholat(new Date());
+		}
+		else{
+			var res = getLocation();
+			if (res.status == "error"){
+				showToaster('<p><h3>'+res.msg+'</h3></p>'+
+							'<p class="buttons"><button class="btn toaster" onclick="displayToasterMap()"><b>MANUALLY SET MY LOCATION</b></button></p>',20);
+			}
+		}
+		
+	}
+	
+	function displayTime() {
+		var now = new Date();
+		var s = now.getSeconds();
+		var m = now.getMinutes();
+		var h = now.getHours();//Math.round(s/2.5);
+		var dd = now.getDate();
+		var mm = now.getMonth()+1;//January is 0!
+		var pool = h;
+		var colShadow = '#707070';
+		 
+		// --- Analog clock ---//
+		var canvas = document.querySelector("#clock");
+		var context = canvas.getContext("2d");
+		 
+		// You can change this to make the clock as big or small as you want.
+		// Just remember to adjust the canvas size if necessary.
+		var clockRadius = (Side - (2/100*Side))/2;
+		 
+		// Make sure the clock is centered in the canvas
+		var clockX = canvas.width / 2;
+		var clockY = canvas.height / 2;
+		 
+		// Make sure TAU is defined (it's not by default)
+		Math.TAU = 2 * PI();
+		
+		if (h == 0 && m == 0 && s%3==0 && s < 10){
+			updateJadwalSholat(now);
+		}
+		
+		function drawArm(progress, armThickness, armLength, armColor) {
+			var armRadians = (Math.TAU * progress) - (Math.TAU/4);
+			var targetX = clockX + COS(armRadians) * (-armLength * clockRadius);
+			var targetY = clockY + SIN(armRadians) * (armLength * clockRadius);
+		 
+			context.lineWidth = armThickness;
+			context.strokeStyle = armColor;
+		 
+			context.beginPath();
+			context.moveTo(clockX, clockY); // Start at the center
+			context.lineTo(targetX, targetY); // Draw a line outwards
+			context.stroke();
+		}
+		
+		function drawCore(coreThickness,coreColor){
+		
+			context.lineWidth = coreThickness;
+			context.strokeStyle = coreColor;
+			
+			context.beginPath();
+			context.arc(clockX,clockY,coreThickness/2,0,2*PI());
+			context.stroke();
+		}
+		
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		
+		// Draw background
+		var rainbow = new Rainbow(); // by default, range is 0 to 100
+		var angleCount = 120;
+		
+		var innerDist		= 0.80;
+		var outerDist		= 1.0;
+		context.lineWidth 	= 10/100*clockRadius;
+		if (pool > 2 && pool <= 5){
+			rainbow.setSpectrum(coLib.t00, coLib.t23,coLib.t22,coLib.t21,coLib.t08,coLib.t07,coLib.t06,coLib.t05,coLib.t04,coLib.t03,coLib.t02,coLib.t01,coLib.t00);
+		}
+		else if (pool > 5 && pool <= 8){
+			rainbow.setSpectrum(coLib.t12, coLib.t11,coLib.t10,coLib.t09,coLib.t08,coLib.t07,coLib.t06,coLib.t05,coLib.t04,coLib.t03,coLib.t02,coLib.t01,coLib.t12);
+		}
+		else if (pool > 8 && pool <= 11){
+			//rainbow.setSpectrum('#ffff66', '#66ff99','#33ccff','#0080ff','#0047b3','#e60000', '#ff6600', '#ffd966','#fff2cc', '#ffff66');
+			rainbow.setSpectrum(coLib.t12, coLib.t11,coLib.t10,coLib.t09,coLib.t08,coLib.t07,coLib.t06,coLib.t05,coLib.t04,coLib.t15,coLib.t14,coLib.t13,coLib.t12);
+		}
+		else if (pool > 11 && pool <= 14){
+			rainbow.setSpectrum(coLib.t12, coLib.t11,coLib.t10,coLib.t09,coLib.t08,coLib.t07,coLib.t18,coLib.t17,coLib.t16,coLib.t15,coLib.t14,coLib.t13,coLib.t12);
+		}
+		else if (pool > 14 && pool <= 17){
+			rainbow.setSpectrum(coLib.t12, coLib.t11,coLib.t10,coLib.t21,coLib.t20,coLib.t19,coLib.t18,coLib.t17,coLib.t16,coLib.t15,coLib.t14,coLib.t13,coLib.t12);
+		}
+		else if (pool > 17 && pool <= 20){
+			rainbow.setSpectrum  (coLib.t00, coLib.t23,coLib.t22,coLib.t21,coLib.t20,coLib.t19,coLib.t18,coLib.t17,coLib.t16,coLib.t15,coLib.t14,coLib.t13,coLib.t00);
+		}
+		else if (pool > 20 && pool <= 23){
+			rainbow.setSpectrum  (coLib.t00, coLib.t23,coLib.t22,coLib.t21,coLib.t20,coLib.t19,coLib.t18,coLib.t17,coLib.t16,coLib.t03,coLib.t02,coLib.t01,coLib.t00);
+		}
+		else{
+			rainbow.setSpectrum  (coLib.t00, coLib.t23,coLib.t22,coLib.t21, coLib.t20,coLib.t19,coLib.t18, coLib.t05, coLib.t04, coLib.t03, coLib.t02, coLib.t01,coLib.t00);
+		}
+		rainbow.setNumberRange(0, angleCount);
+		for (var i = 0; i < angleCount; i++)
+		{
+			
+			var index = i;
+			context.strokeStyle = '#' + rainbow.colourAt(index);
+			
+			var armRadians = (Math.TAU * (i/angleCount)) - (Math.TAU/4);
+			var x1 = clockX + COS(armRadians) * (innerDist * clockRadius);
+			var y1 = clockY + SIN(armRadians) * (innerDist * clockRadius);
+			var x2 = clockX + COS(armRadians) * (outerDist * clockRadius);
+			var y2 = clockY + SIN(armRadians) * (outerDist * clockRadius);
+			
+			context.beginPath();
+			context.moveTo(x1, y1); // Start at the center
+			context.lineTo(x2, y2); // Draw a line outwards
+			context.stroke();
+		}
+		for (var i = 0; i < 12; i++)
+		{
+			var innerDist		= (i % 3) ? 0.73 : 0.68;
+			var outerDist		= (i % 3) ? 0.8 : 0.8;
+			context.lineWidth 	= (i % 3) ? 4/100*clockRadius : 6/100*clockRadius;
+			//context.strokeStyle = (pool > 6 && pool <= 18) ? ((i != 6) ? '#000000' : '#ffffff') : ((i != 6) ?'#ffffff':'#000000');
+			context.strokeStyle = colShadow;
+			var armRadians = (Math.TAU * (i/12)) - (Math.TAU/4);
+			var x1 = clockX + COS(armRadians) * (innerDist * clockRadius);
+			var y1 = clockY + SIN(armRadians) * (innerDist * clockRadius);
+			var x2 = clockX + COS(armRadians) * (outerDist * clockRadius);
+			var y2 = clockY + SIN(armRadians) * (outerDist * clockRadius);
+			
+			context.beginPath();
+			context.moveTo(x1, y1); // Start at the center
+			context.lineTo(x2, y2); // Draw a line outwards
+			context.stroke();
+		}
+		
+		context.lineWidth = 1/100*clockRadius;
+		context.strokeStyle = colShadow;
+		
+		context.beginPath();
+		context.arc(clockX,clockY,clockRadius,0,2*PI());
+		context.stroke();
+		
+		context.beginPath();
+		context.arc(clockX,clockY,(80/100)*clockRadius,0,2*PI());
+		context.stroke();
+		
+		var hProgress = (h/12) + (1/12)*(m/60) + (1/12)*(1/60)*(s/60);
+		var mProgress =                 (m/60) +        (1/60)*(s/60);
+		var sProgress =                                        (s/60);
+		
+		index = angleCount - Math.round(hProgress  *  angleCount);
+		if (index < 0){
+			index = angleCount + index;
+		}
+		
+		drawArm( hProgress, 12/100*clockRadius, 0.51, colShadow); // Hour
+		drawCore(24/100*clockRadius,colShadow);
+		drawArm( hProgress, 9.7/100*clockRadius, 1/2, '#'+rainbow.colourAt (    index     ));
+		//drawArm( hProgress, 10, -5/clockRadius, colShadow); // Hour
+		drawCore(23/100*clockRadius,'#'+rainbow.colourAt (    index     ) );
+
+		index = angleCount - Math.round(mProgress  *  angleCount);
+		if (index < 0){
+			index = angleCount + index;
+		}
+		
+		drawArm( mProgress, 6/100*clockRadius, 0.691, colShadow);
+		drawCore(8/100*clockRadius,colShadow);
+		drawArm( mProgress,  4/100*clockRadius, 0.68, '#'+rainbow.colourAt (    index     )); // Minute
+		//drawArm( mProgress,  4, -2/clockRadius, colShadow); // Minute
+		drawCore(7/100*clockRadius,'#'+rainbow.colourAt (    index     ));
+		
+		drawArm( sProgress,  3/100*clockRadius,   1, colShadow); // Second
+		drawArm( sProgress,  3/100*clockRadius, -0.297, colShadow); // Second
+		drawCore(3.89/100*clockRadius,colShadow);
+		drawArm( sProgress,  2/100*clockRadius,   0.99, '#ff4d4d');
+		drawArm( sProgress,  2/100*clockRadius, -0.29, '#ff4d4d');
+		drawCore(3/100*clockRadius,'#ff4d4d');
+		
+		
+		var res = cekWaktuSholat(mm,dd,h,m,s);
+		if (res.msg != '-'){
+			if (JadwalSholat.waktu != res.waktu){
+				if (ToasterTime<0){
+					JadwalSholat.waktu = res.waktu;
+					showToaster('<p><h3>'+res.msg+'</h3></p>',600);
+				}
+				else{
+					ToasterTime = parseInt(ToasterTimeLimit/2);
+				}
+			}
+		}
+		
+		
+		var timeString = formatHour(h) + ":" + padZero(m) + ":" + padZero(s) + " " + getTimePeriod(h);
+		document.querySelector("#current-time").innerHTML = timeString;
+		
+		
+		if (ToasterTime >= ToasterTimeLimit){
+			fade();
+		}
+		
+		if (ToasterTime>=0){
+			ToasterTime++;
+		}
+	}
+	
+	function hitungWaktuSholat(dateTime){
+		var now = dateTime;
+		var yy = now.getFullYear();
+		var dd = now.getDate();
+		var mm = now.getMonth()+1;//January is 0!
+		var result =  {"status":"", "dbg": "","data":{},"waktu":"-"};
+		
+		var M = mm<3? mm+12: mm;
+		var Y = mm<3? yy-1: yy;
+		var A = parseInt(Y/100);
+		var B = (yy<1583 ? (mm<11 ? (dd<4 ? 0 : (dd>14 ? 2+parseInt(A/4)-A : "TANGGAL SALAH")) : 2+parseInt(A/4)-A) : 2+parseInt(A/4)-A);
+		
+		if (B == "TANGGAL SALAH"){
+			result.status = "failure";
+			result.dbg += "</br>B="+B;
+			return result;
+		}
+		
+		var lintang = Lokasi[0]*PI()/180;
+		
+		//Pukul 12.00 LT
+		var julian12UT = 1720994.5+parseInt(365.25*Y)+parseInt(30.60001*(M+1))+B+dd+12/24;
+		var julian12LT = julian12UT-GMT/24;
+		var sudutTglT = 2*PI()*(julian12LT-2451545)/365.25; //in radian
+		var U = (julian12LT-2451545)/36525;
+		var L0 = (280.46607 + 36000.7698*U)*PI()/180;
+		var sunDecl12 = 0.37877+23.264*SIN((57.297*sudutTglT-79.547)*PI()/180)+0.3812*SIN((2*57.297*sudutTglT-82.682)*PI()/180)+0.17132*SIN((3*57.297*sudutTglT-59.722)*PI()/180);
+		var sunDecl12_rad = sunDecl12*PI()/180;
+		var EoT =(-1*(1789 + 237*U)*SIN(L0) - (7146 - 62*U)*COS(L0) + (9934 - 14*U)*SIN(2*L0) - (29 + 5*U)*COS(2*L0) + (74 + 10*U)*SIN(3*L0) + (320 - 4*U)*COS(3*L0) - 212*SIN(4*L0))/1000;//Equation of Time
+		
+		//result.dbg += "<br/>julian12UT="+julian12UT+",julian12LT="+julian12LT+",sudutTglT="+sudutTglT+",U="+U+",L0="+L0;
+		//result.dbg += "<br/>sunDecl12="+sunDecl12+",sunDecl12_rad="+sunDecl12_rad+",EoT="+EoT;
+		
+		//Dzuhur
+		var tDzuhurEsti = 12+GMT-Lokasi[1]/15-EoT/60;//Perkiraan waktu Zhuhur
+		var JD_dzuhur = julian12LT+tDzuhurEsti/24-12/24;
+		sudutTglT = 2*PI()*(JD_dzuhur-2451545)/365.25; //in radian
+		U = (JD_dzuhur-2451545)/36525;
+		L0 = (280.46607 + 36000.7698*U)*PI()/180;
+		var sunDecl =0.37877+23.264*SIN((57.297*sudutTglT-79.547)*PI()/180)+0.3812*SIN((2*57.297*sudutTglT-82.682)*PI()/180)+0.17132*SIN((3*57.297*sudutTglT-59.722)*PI()/180);
+		var sunDecl_rad =sunDecl*PI()/180;
+		EoT =(-1*(1789 + 237*U)*SIN(L0) - (7146 - 62*U)*COS(L0) + (9934 - 14*U)*SIN(2*L0) - (29 + 5*U)*COS(2*L0) + (74 + 10*U)*SIN(3*L0) + (320 - 4*U)*COS(3*L0) - 212*SIN(4*L0))/1000;
+		var tDzuhur =12+GMT-Lokasi[1]/15-EoT/60;
+		tDzuhur = (tDzuhur/24) / timeConst;
+		
+		//Ashar
+		var hourAngleEsti = (SIN(ATAN(1/(1+TAN(Math.abs(lintang-sunDecl12_rad)))))-SIN(sunDecl12_rad)*SIN(lintang))/(COS(sunDecl12_rad)*COS(lintang));
+		var hourAngleEstiAshar = ACOS(hourAngleEsti)*180/PI();
+		var JD_ashar = julian12LT+hourAngleEstiAshar/360;
+		sudutTglT = 2*PI()*(JD_ashar-2451545)/365.25; //in radian
+		U = (JD_ashar-2451545)/36525;
+		L0 = (280.46607 + 36000.7698*U)*PI()/180;
+		sunDecl =0.37877+23.264*SIN((57.297*sudutTglT-79.547)*PI()/180)+0.3812*SIN((2*57.297*sudutTglT-82.682)*PI()/180)+0.17132*SIN((3*57.297*sudutTglT-59.722)*PI()/180);
+		sunDecl_rad = sunDecl*PI()/180;
+		EoT =(-1*(1789 + 237*U)*SIN(L0) - (7146 - 62*U)*COS(L0) + (9934 - 14*U)*SIN(2*L0) - (29 + 5*U)*COS(2*L0) + (74 + 10*U)*SIN(3*L0) + (320 - 4*U)*COS(3*L0) - 212*SIN(4*L0))/1000;
+		var altitude = ATAN(1/(1+TAN(Math.abs(lintang-sunDecl_rad))))*180/PI();
+		var altCorrection = 1/(60*TAN((altitude+7.31/(altitude+4.4))*PI()/180));
+		altitude = altitude-altCorrection;
+		var altitude_rad = altitude*PI()/180;
+		var hourAngle = (SIN(altitude_rad)-SIN(sunDecl_rad)*SIN(lintang))/(COS(sunDecl_rad)*COS(lintang));
+		var hourAngleAshar =ACOS(hourAngle)*180/PI();
+		var tAshar =12+GMT-Lokasi[1]/15-EoT/60+hourAngleAshar/15;
+		tAshar = (tAshar/24) / timeConst;
+		
+		//Maghrib
+		hourAngleEsti = (SIN((-0.8333-0.0347*Math.pow(Ketinggian,0.5))*PI()/180)-SIN(sunDecl12_rad)*SIN(lintang))/(COS(sunDecl12_rad)*COS(lintang));
+		var hourAngleEstiMaghrib =(Math.abs(hourAngleEsti)>1 ?  "TIDAK ADA" : ACOS((SIN((-0.8333-0.0347*Math.pow(Ketinggian,0.5))*PI()/180)-SIN(sunDecl12_rad)*SIN(lintang))/(COS(sunDecl12_rad)*COS(lintang)))*180/PI());
+		var JD_maghrib = (hourAngleEstiMaghrib=="TIDAK ADA"? "TIDAK ADA" : julian12LT+hourAngleEstiMaghrib/360);
+		sudutTglT = (hourAngleEstiMaghrib=="TIDAK ADA"? "TIDAK ADA" : 2*PI()*(JD_maghrib-2451545)/365.25);
+		U = (hourAngleEstiMaghrib=="TIDAK ADA"? "TIDAK ADA" : (JD_maghrib-2451545)/36525);
+		L0 = (hourAngleEstiMaghrib=="TIDAK ADA"? "TIDAK ADA" :  (280.46607 + 36000.7698*U)*PI()/180);
+		sunDecl = (hourAngleEstiMaghrib=="TIDAK ADA"? "TIDAK ADA" : 0.37877+23.264*SIN((57.297*sudutTglT-79.547)*PI()/180)+0.3812*SIN((2*57.297*sudutTglT-82.682)*PI()/180)+0.17132*SIN((3*57.297*sudutTglT-59.722)*PI()/180));
+		sunDecl_rad = (hourAngleEstiMaghrib=="TIDAK ADA"? "TIDAK ADA" : sunDecl*PI()/180);
+		EoT = (hourAngleEstiMaghrib=="TIDAK ADA"? "TIDAK ADA" : (-1*(1789 + 237*U)*SIN(L0) - (7146 - 62*U)*COS(L0) + (9934 - 14*U)*SIN(2*L0) - (29 + 5*U)*COS(2*L0) + (74 + 10*U)*SIN(3*L0) + (320 - 4*U)*COS(3*L0) - 212*SIN(4*L0))/1000);
+		hourAngle = (hourAngleEstiMaghrib=="TIDAK ADA"? "TIDAK ADA" : (SIN((-0.8333-0.0347*Math.pow(Ketinggian,0.5))*PI()/180)-SIN(sunDecl_rad)*SIN(lintang))/(COS(sunDecl_rad)*COS(lintang)));
+		var hourAngleMaghrib = (hourAngleEstiMaghrib=="TIDAK ADA"? "TIDAK ADA" : (Math.abs(hourAngle)>1 ? "TIDAK ADA" : ACOS(hourAngle)*180/PI()));
+		var tMaghrib = (hourAngleMaghrib=="TIDAK ADA"? "TIDAK ADA" : 12+GMT-Lokasi[1]/15-EoT/60+hourAngleMaghrib/15);
+		tMaghrib = (tMaghrib=="TIDAK ADA"? "TIDAK ADA" : (tMaghrib/24) / timeConst);
+		
+		//Isya
+		var sudutIsya_rad = SudutIsya*PI()/180;//rad
+		hourAngleEsti =(SIN(-1*sudutIsya_rad)-SIN(sunDecl12_rad)*SIN(lintang))/(COS(sunDecl12_rad)*COS(lintang));
+		var hourAngleEstiIsya = (hourAngleEsti<-1 ? "TIDAK ADA" : ACOS(hourAngleEsti)*180/PI());
+		var JD_isya = (hourAngleEstiIsya=="TIDAK ADA"? "TIDAK ADA": julian12LT+hourAngleEstiIsya/360);
+		sudutTglT = (hourAngleEstiIsya=="TIDAK ADA"?"TIDAK ADA" : 2*PI()*(JD_isya-2451545)/365.25);
+		U = (hourAngleEstiIsya=="TIDAK ADA"? "TIDAK ADA": (JD_isya-2451545)/36525);
+		L0 = (hourAngleEstiIsya=="TIDAK ADA"? "TIDAK ADA" : (280.46607 + 36000.7698*U)*PI()/180);
+		sunDecl = (hourAngleEstiIsya=="TIDAK ADA"? "TIDAK ADA" : 0.37877+23.264*SIN((57.297*sudutTglT-79.547)*PI()/180)+0.3812*SIN((2*57.297*sudutTglT-82.682)*PI()/180)+0.17132*SIN((3*57.297*sudutTglT-59.722)*PI()/180));
+		sunDecl_rad = (hourAngleEstiIsya=="TIDAK ADA"? "TIDAK ADA" : sunDecl*PI()/180);
+		EoT = (hourAngleEstiIsya=="TIDAK ADA"? "TIDAK ADA" : (-1*(1789 + 237*U)*SIN(L0) - (7146 - 62*U)*COS(L0) + (9934 - 14*U)*SIN(2*L0) - (29 + 5*U)*COS(2*L0) + (74 + 10*U)*SIN(3*L0) + (320 - 4*U)*COS(3*L0) - 212*SIN(4*L0))/1000);
+		hourAngle = (hourAngleEstiIsya=="TIDAK ADA"? "TIDAK ADA" : (SIN(-1*sudutIsya_rad)-SIN(sunDecl_rad)*SIN(lintang))/(COS(sunDecl_rad)*COS(lintang)));
+		var hourAngleIsya = (hourAngleEstiIsya=="TIDAK ADA"? "TIDAK ADA" : (Math.abs(hourAngle)>1 ? "TIDAK ADA" : ACOS(hourAngle)*180/PI()));
+		var tIsya = (hourAngleIsya=="TIDAK ADA"? "TIDAK ADA" : 12+GMT-Lokasi[1]/15-EoT/60+hourAngleIsya/15);
+		tIsya = (tIsya=="TIDAK ADA"? "TIDAK ADA" : (tIsya/24) / timeConst);
+		
+		//Shubuh
+		var sudutShubuh_rad = SudutSubuh*PI()/180;
+		hourAngleEsti = (SIN(-1*sudutShubuh_rad)-SIN(sunDecl12_rad)*SIN(lintang))/(COS(sunDecl12_rad)*COS(lintang));
+		var hourAngleEstiShubuh =(hourAngleEsti<-1?"TIDAK ADA": ACOS(hourAngleEsti)*180/PI());
+		var JD_shubuh = (hourAngleEstiShubuh=="TIDAK ADA"? "TIDAK ADA":julian12LT-hourAngleEstiShubuh/360);
+		sudutTglT = (hourAngleEstiShubuh=="TIDAK ADA"? "TIDAK ADA":2*PI()*(JD_shubuh-2451545)/365.25);
+		U = (hourAngleEstiShubuh=="TIDAK ADA"? "TIDAK ADA":(JD_shubuh-2451545)/36525);
+		L0 = (hourAngleEstiShubuh=="TIDAK ADA"? "TIDAK ADA": (280.46607 + 36000.7698*U)*PI()/180);
+		sunDecl = (hourAngleEstiShubuh=="TIDAK ADA"? "TIDAK ADA":0.37877+23.264*SIN((57.297*sudutTglT-79.547)*PI()/180)+0.3812*SIN((2*57.297*sudutTglT-82.682)*PI()/180)+0.17132*SIN((3*57.297*sudutTglT-59.722)*PI()/180));
+		sunDecl_rad = (hourAngleEstiShubuh=="TIDAK ADA"? "TIDAK ADA" : sunDecl*PI()/180);
+		EoT = (hourAngleEstiShubuh=="TIDAK ADA"? "TIDAK ADA":(-1*(1789 + 237*U)*SIN(L0) - (7146 - 62*U)*COS(L0) + (9934 - 14*U)*SIN(2*L0) - (29 + 5*U)*COS(2*L0) + (74 + 10*U)*SIN(3*L0) + (320 - 4*U)*COS(3*L0) - 212*SIN(4*L0))/1000);
+		hourAngle = (hourAngleEstiShubuh=="TIDAK ADA"?"TIDAK ADA":(SIN(-1*sudutShubuh_rad)-SIN(sunDecl_rad)*SIN(lintang))/(COS(sunDecl_rad)*COS(lintang)));
+		var hourAngleShubuh = (hourAngleEstiShubuh=="TIDAK ADA"?"TIDAK ADA" : (Math.abs(hourAngle)>1 ? "TIDAK ADA" : ACOS(hourAngle)*180/PI()));
+		var tShubuh = (hourAngleShubuh=="TIDAK ADA"? "TIDAK ADA" : 12+GMT-Lokasi[1]/15-EoT/60-hourAngleShubuh/15);
+		tShubuh = (tShubuh=="TIDAK ADA"? "TIDAK ADA" : (tShubuh/24) / timeConst);
+		
+		//Terbit
+		hourAngleEsti =(SIN((-0.8333-0.0347*Math.pow(Ketinggian,0.5))*PI()/180)-SIN(sunDecl12_rad)*SIN(lintang))/(COS(sunDecl12_rad)*COS(lintang));
+		var hourAngleEstiTerbit = (Math.abs(hourAngleEsti)>1?"TIDAK ADA": ACOS(hourAngleEsti)*180/PI());
+		var JD_terbit = (hourAngleEstiTerbit=="TIDAK ADA"? "TIDAK ADA": julian12LT-hourAngleEstiTerbit/360);
+		sudutTglT = (hourAngleEstiTerbit=="TIDAK ADA"? "TIDAK ADA": 2*PI()*(JD_terbit-2451545)/365.25);
+		U = (hourAngleEstiTerbit=="TIDAK ADA"? "TIDAK ADA":(JD_terbit-2451545)/36525);
+		L0 = (hourAngleEstiTerbit=="TIDAK ADA"? "TIDAK ADA": (280.46607 + 36000.7698*U)*PI()/180);
+		sunDecl = (hourAngleEstiTerbit=="TIDAK ADA"? "TIDAK ADA": 0.37877+23.264*SIN((57.297*sudutTglT-79.547)*PI()/180)+0.3812*SIN((2*57.297*sudutTglT-82.682)*PI()/180)+0.17132*SIN((3*57.297*sudutTglT-59.722)*PI()/180));
+		sunDecl_rad = (hourAngleEstiTerbit=="TIDAK ADA"? "TIDAK ADA" : sunDecl*PI()/180);
+		EoT = (hourAngleEstiTerbit=="TIDAK ADA"? "TIDAK ADA": (-1*(1789 + 237*U)*SIN(L0) - (7146 - 62*U)*COS(L0) + (9934 - 14*U)*SIN(2*L0) - (29 + 5*U)*COS(2*L0) + (74 + 10*U)*SIN(3*L0) + (320 - 4*U)*COS(3*L0) - 212*SIN(4*L0))/1000);
+		hourAngle = (hourAngleEstiTerbit=="TIDAK ADA"?"TIDAK ADA": (SIN((-0.8333-0.0347*Math.pow(Ketinggian,0.5))*PI()/180)-SIN(sunDecl_rad)*SIN(lintang))/(COS(sunDecl_rad)*COS(lintang)));
+		var hourAngleTerbit = (hourAngleEstiTerbit=="TIDAK ADA"?"TIDAK ADA" : (Math.abs(hourAngle)>1?"TIDAK ADA": ACOS(hourAngle)*180/PI()));
+		var tTerbit = (hourAngleTerbit=="TIDAK ADA"? "TIDAK ADA" : 12+GMT-Lokasi[1]/15-EoT/60-hourAngleTerbit/15);
+		tTerbit = (tTerbit=="TIDAK ADA"? "TIDAK ADA" : (tTerbit/24) / timeConst);
+		
+		
+		result.data["Shubuh"] = (tShubuh=="TIDAK ADA"? "TIDAK ADA" : (parseInt(tShubuh/3600) +":" + (2 + parseInt((tShubuh%3600)/60))));
+		result.data["Terbit"] = (tTerbit=="TIDAK ADA"? "TIDAK ADA" : (parseInt(tTerbit/3600) +":" +(2+ parseInt((tTerbit%3600)/60))));
+		result.data["Dzuhur"] = (hourAngleEsti>1? "TIDAK ADA" : (parseInt(tDzuhur/3600) +":"+ (2+ parseInt((tDzuhur%3600)/60))));
+		result.data["Ashar"] = (hourAngleEsti>1? "TIDAK ADA" : (parseInt(tAshar/3600) +":" +(2+ parseInt((tAshar%3600)/60))));
+		result.data["Maghrib"] = (hourAngleMaghrib=="TIDAK ADA"? "TIDAK ADA" : (parseInt(tMaghrib/3600) +":"+ (2+ parseInt((tMaghrib%3600)/60))));
+		result.data["Isya"] = (hourAngleIsya=="TIDAK ADA"? "TIDAK ADA" : (parseInt(tIsya/3600) +":"+( 2+ parseInt((tIsya%3600)/60))));
+		
+		result.status = "success";
+		return result;
+	}
+	
+	function PI(){
+		return Math.PI;
+	}
+	function SIN(input){
+		return Math.sin(input);
+	}
+	function COS(input){
+		return Math.cos(input);
+	}
+	function TAN(input){
+		return Math.tan(input);
+	}
+	function ASIN(input){
+		return Math.asin(input);
+	}
+	function ACOS(input){
+		return Math.acos(input);
+	}
+	function ATAN(input){
+		return Math.atan(input);
+	}
+	
+	function cekWaktuSholat(mm,dd,h,m,s){
+		if (JadwalSholat.data){
+			var wait = 10; //minute
+			
+			//cek waktu dzuhur:
+			var strTimeArray = JadwalSholat.data.Dzuhur.split(":");
+			if (h == parseInt(strTimeArray[0])){
+				if (m - parseInt(strTimeArray[1]) >=  0 && m - parseInt(strTimeArray[1]) <= wait){
+					return {"msg":"Waktu Dzuhur telah tiba.","waktu":"Dzuhur"};
+				}
+			}
+			//cek waktu ashar:
+			strTimeArray = JadwalSholat.data.Ashar.split(":");
+			if (h == parseInt(strTimeArray[0])){
+				if (m - parseInt(strTimeArray[1]) >=  0 && m - parseInt(strTimeArray[1]) <= wait){
+					return {"msg":"Waktu Ashar telah tiba.","waktu":"Ashar"};
+				}
+			}
+			//cek waktu maghrib:
+			strTimeArray = JadwalSholat.data.Maghrib.split(":");
+			if (h == parseInt(strTimeArray[0])){
+				if (m - parseInt(strTimeArray[1]) >=  0 && m - parseInt(strTimeArray[1]) <= wait){
+					return {"msg":"Waktu Maghrib telah tiba.","waktu":"Maghrib"};
+				}
+			}
+			//cek waktu Isya:
+			strTimeArray = JadwalSholat.data.Isya.split(":");
+			if (h == parseInt(strTimeArray[0])){
+				if (m - parseInt(strTimeArray[1]) >=  0 && m - parseInt(strTimeArray[1]) <= wait){
+					return {"msg":"Waktu Isya telah tiba.","waktu":"Isya"};
+				}
+			}
+			//cek waktu Imsak:
+			strTimeArray = JadwalSholat.data.Shubuh.split(":");
+			if (h == parseInt(strTimeArray[0])){
+				if (m - (parseInt(strTimeArray[1]) - 10 ) >=0 && m - (parseInt(strTimeArray[1]) - 10 ) <= 9){
+					return {"msg":"Waktu Imsak telah tiba.","waktu":"Imsak"};
+				}
+			}
+			//cek waktu Subuh:
+			strTimeArray = JadwalSholat.data.Shubuh.split(":");
+			if (h == parseInt(strTimeArray[0])){
+				if (m - parseInt(strTimeArray[1]) >=  0 && m - parseInt(strTimeArray[1]) <= wait){
+					return {"msg":"Waktu Subuh telah tiba.","waktu":"Subuh"};
+				}
+			}
+			//cek waktu Terbit:
+			strTimeArray = JadwalSholat.data.Terbit.split(":");
+			if (h == parseInt(strTimeArray[0])){
+				if (m - parseInt(strTimeArray[1]) >=  0 && m - parseInt(strTimeArray[1]) <= wait){
+					return {"msg":"Waktu Terbit telah tiba.","waktu":"Terbit"};
+				}
+			}
+		}
+		
+		return {"msg":"-","waktu":"-"};
+	}
+	
+	function padZero(num) {
+		if (num < 10) { 
+			return "0" + String(num);
+		}
+		else {
+			return String(num);
+		}
+	}
+	
+	function formatHour(h) {
+		var hour = h % 12;
+	 
+		if (hour == 0) { 
+			hour = 12; 
+		}
+		 
+		return String(hour)
+	}
+	
+	function getTimePeriod(h) {
+		return (h < 12) ? "AM" : "PM"; 
+	}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFL-PkkvMDutg6s7MjY7xBHWywN0EDO3s&callback=myMap"></script>
+</body>
+</html>

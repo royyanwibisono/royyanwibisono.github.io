@@ -1,0 +1,30 @@
+http://maps.googleapis.com/maps/api/elevation/xml?sensor=false&locations=%20-6.883978399999999,107.5814522
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ElevationResponse>
+ <status>OK</status>
+ <result>
+  <location>
+   <lat>-6.8839784</lat>
+   <lng>107.5814522</lng>
+  </location>
+  <elevation>792.4223022</elevation>
+  <resolution>152.7032318</resolution>
+ </result>
+</ElevationResponse>
+
+http://maps.googleapis.com/maps/api/elevation/json?sensor=false&locations=%20-6.883978399999999,107.5814522
+
+{
+   "results" : [
+      {
+         "elevation" : 792.4223022460938,
+         "location" : {
+            "lat" : -6.883978399999999,
+            "lng" : 107.5814522
+         },
+         "resolution" : 152.7032318115234
+      }
+   ],
+   "status" : "OK"
+}
