@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/eltraingraph-r/static/css/main.9b6b8538.css",
-    "main.js": "/eltraingraph-r/static/js/main.7de01334.js",
+    "main.css": "/eltraingraph-r/static/css/main.be2e4045.css",
+    "main.js": "/eltraingraph-r/static/js/main.77d9d14c.js",
     "index.html": "/eltraingraph-r/index.html"
   },
   "entrypoints": [
-    "static/css/main.9b6b8538.css",
-    "static/js/main.7de01334.js"
+    "static/css/main.be2e4045.css",
+    "static/js/main.77d9d14c.js"
   ]
 }
