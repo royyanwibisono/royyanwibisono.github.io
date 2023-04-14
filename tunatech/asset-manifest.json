@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/tunatech/static/css/main.ad6a7ae7.css",
-    "main.js": "/tunatech/static/js/main.cd126e34.js",
+    "main.css": "/tunatech/static/css/main.4a94cc4a.css",
+    "main.js": "/tunatech/static/js/main.0dc8f873.js",
     "static/media/penyatu (4).png": "/tunatech/static/media/penyatu (4).4bad860ad3d8f66b5202.png",
     "static/media/Astro.png": "/tunatech/static/media/Astro.e507581ea65bd901208b.png",
     "static/media/pp.jpg": "/tunatech/static/media/pp.cec1a2468f580b63f48d.jpg",
@@ -31,7 +31,7 @@
     "index.html": "/tunatech/index.html"
   },
   "entrypoints": [
-    "static/css/main.ad6a7ae7.css",
-    "static/js/main.cd126e34.js"
+    "static/css/main.4a94cc4a.css",
+    "static/js/main.0dc8f873.js"
   ]
 }
