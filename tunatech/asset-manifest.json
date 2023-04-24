@@ -1,7 +1,9 @@
 {
   "files": {
-    "main.css": "/tunatech/static/css/main.4a94cc4a.css",
-    "main.js": "/tunatech/static/js/main.803d1c45.js",
+    "main.css": "/tunatech/static/css/main.eb4a223a.css",
+    "main.js": "/tunatech/static/js/main.929698e6.js",
+    "static/media/ijazahpolban.png": "/tunatech/static/media/ijazahpolban.9fdd0909de1c33f8e1f7.png",
+    "static/media/finalproject.png": "/tunatech/static/media/finalproject.b1e3866fd9c38d3737d0.png",
     "static/media/penyatu (4).png": "/tunatech/static/media/penyatu (4).4bad860ad3d8f66b5202.png",
     "static/media/android_clock (3).png": "/tunatech/static/media/android_clock (3).79d91b96d77e6f7e2f4b.png",
     "static/media/android_clock (2).png": "/tunatech/static/media/android_clock (2).12f2d6d88553da3ceed6.png",
@@ -12,6 +14,7 @@
     "static/media/eltraingraph (1).png": "/tunatech/static/media/eltraingraph (1).689e17d5c84c61ed492f.png",
     "static/media/crimson-light-01.png": "/tunatech/static/media/crimson-light-01.aefe9ef8ed13ca4f5828.png",
     "static/media/satelite.png": "/tunatech/static/media/satelite.14c195ca0bea9d14e29f.png",
+    "static/media/finalproject3.png": "/tunatech/static/media/finalproject3.d958f5f9cc25e06a2435.png",
     "static/media/eltraingraph (3).png": "/tunatech/static/media/eltraingraph (3).fafbf9469ece8bef7c7e.png",
     "static/media/penyatu (2).png": "/tunatech/static/media/penyatu (2).d442db717c36aa87ffe9.png",
     "static/media/tawafclock2.png": "/tunatech/static/media/tawafclock2.74d89357685b91d24c7b.png",
@@ -33,20 +36,13 @@
     "static/media/bangladesh2.png": "/tunatech/static/media/bangladesh2.fb0027a34d355f7a282a.png",
     "static/media/bangladesh.png": "/tunatech/static/media/bangladesh.ba9ce08ade8516239628.png",
     "static/media/bangladesh3.png": "/tunatech/static/media/bangladesh3.a743ed7d98db1bfda1d1.png",
-    "static/media/vendor_app (7).png": "/tunatech/static/media/vendor_app (7).d2af384f48ceba106e18.png",
-    "static/media/vendor_app (5).png": "/tunatech/static/media/vendor_app (5).15b2d9e3f7c7711c3df3.png",
-    "static/media/vendor_app (6).png": "/tunatech/static/media/vendor_app (6).d2b1124fc14e06f6893e.png",
     "static/media/crimson-birds-01.png": "/tunatech/static/media/crimson-birds-01.504b239d12697b0ae427.png",
     "static/media/crimson-cloud2-01.png": "/tunatech/static/media/crimson-cloud2-01.4bdba2f7c5f1d446b6de.png",
-    "static/media/vendor_app (4).png": "/tunatech/static/media/vendor_app (4).b8015db1996912d2aad2.png",
     "static/media/crimson-cloud1-01.png": "/tunatech/static/media/crimson-cloud1-01.b0e5a0732f7559e9e55a.png",
-    "static/media/vendor_app (3).png": "/tunatech/static/media/vendor_app (3).b5d7916c8cbc1a90277d.png",
-    "static/media/vendor_app (2).png": "/tunatech/static/media/vendor_app (2).b1419c2111770225141d.png",
-    "static/media/vendor_app (1).png": "/tunatech/static/media/vendor_app (1).6593db5e4757a3761b2a.png",
     "index.html": "/tunatech/index.html"
   },
   "entrypoints": [
-    "static/css/main.4a94cc4a.css",
-    "static/js/main.803d1c45.js"
+    "static/css/main.eb4a223a.css",
+    "static/js/main.929698e6.js"
   ]
 }
