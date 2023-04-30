@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.css": "/static/css/main.cf17d732.css",
-    "main.js": "/static/js/main.9e4de877.js",
-    "static/js/27.2ba6099c.chunk.js": "/static/js/27.2ba6099c.chunk.js",
-    "index.html": "/index.html"
+    "main.css": "/royyanwibisono.github.io/news/static/css/main.cf17d732.css",
+    "main.js": "/royyanwibisono.github.io/news/static/js/main.5d3aed8d.js",
+    "static/js/27.2ba6099c.chunk.js": "/royyanwibisono.github.io/news/static/js/27.2ba6099c.chunk.js",
+    "index.html": "/royyanwibisono.github.io/news/index.html"
   },
   "entrypoints": [
     "static/css/main.cf17d732.css",
-    "static/js/main.9e4de877.js"
+    "static/js/main.5d3aed8d.js"
   ]
 }
