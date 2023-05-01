@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/tunatech/static/css/main.eb4a223a.css",
-    "main.js": "/tunatech/static/js/main.929698e6.js",
+    "main.js": "/tunatech/static/js/main.bf53dcd2.js",
     "static/media/ijazahpolban.png": "/tunatech/static/media/ijazahpolban.9fdd0909de1c33f8e1f7.png",
     "static/media/finalproject.png": "/tunatech/static/media/finalproject.b1e3866fd9c38d3737d0.png",
     "static/media/penyatu (4).png": "/tunatech/static/media/penyatu (4).4bad860ad3d8f66b5202.png",
@@ -9,9 +9,11 @@
     "static/media/android_clock (2).png": "/tunatech/static/media/android_clock (2).12f2d6d88553da3ceed6.png",
     "static/media/Astro.png": "/tunatech/static/media/Astro.e507581ea65bd901208b.png",
     "static/media/pp.jpg": "/tunatech/static/media/pp.cec1a2468f580b63f48d.jpg",
+    "static/media/newssc.png": "/tunatech/static/media/newssc.c9374ce2ce3a88e06f22.png",
     "static/media/tawafclock3.png": "/tunatech/static/media/tawafclock3.42fa009ff26e8f4c94b6.png",
     "static/media/tawafclock1.png": "/tunatech/static/media/tawafclock1.5ae45ca5271d99c0178f.png",
     "static/media/eltraingraph (1).png": "/tunatech/static/media/eltraingraph (1).689e17d5c84c61ed492f.png",
+    "static/media/newssc2.png": "/tunatech/static/media/newssc2.065b9f307c49b4b9ebff.png",
     "static/media/crimson-light-01.png": "/tunatech/static/media/crimson-light-01.aefe9ef8ed13ca4f5828.png",
     "static/media/satelite.png": "/tunatech/static/media/satelite.14c195ca0bea9d14e29f.png",
     "static/media/finalproject3.png": "/tunatech/static/media/finalproject3.d958f5f9cc25e06a2435.png",
@@ -23,6 +25,7 @@
     "static/media/crimson-base-01.png": "/tunatech/static/media/crimson-base-01.abe50e326f9d01da92fc.png",
     "static/media/crimson-main-01.png": "/tunatech/static/media/crimson-main-01.f31cbca405445686bc1e.png",
     "static/media/pcvue (2).png": "/tunatech/static/media/pcvue (2).bbd613ceb3cfb378d027.png",
+    "static/media/newssc3.png": "/tunatech/static/media/newssc3.23a836c478f0ddc7b743.png",
     "static/media/eltraingraph (2).png": "/tunatech/static/media/eltraingraph (2).fd7a39463c4e42a2457d.png",
     "static/media/power (2).png": "/tunatech/static/media/power (2).5c660f52a6440b3762ea.png",
     "static/media/crimson-pointer.png": "/tunatech/static/media/crimson-pointer.f2fb30efb3bb383d5539.png",
@@ -43,6 +46,6 @@
   },
   "entrypoints": [
     "static/css/main.eb4a223a.css",
-    "static/js/main.929698e6.js"
+    "static/js/main.bf53dcd2.js"
   ]
 }
