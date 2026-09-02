@@ -1,261 +1,446 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Royyan Wibisono</title>
-	<meta name="description" content="Royyan Wibisono is a software developer with expertise in Golang, Python, MongoDB, MySQL, WebSockets, and WebRTC.">
-	<meta name="keywords" content="Royyan Wibisono, software developer, Golang, Python, MongoDB, MySQL, WebSockets, WebRTC">
-	<link rel="canonical" href="https://royyanwibisono.github.io/" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/style.css">
-    <style>
-      
-body {
-  font-family: Arial, sans-serif;
-  background-color: #262626;
-  color: #fff;
-}
-.container {
-  margin: 0 auto;
-  background-color: #1a1a1a;
-  border-radius: 10px;
-  box-shadow: 0 8px 10px rgba(0, 255, 213, 0.418);
-  max-width: 600px;
-  width: 90%;
-  overflow: hidden;
-}
-.card{
-  padding: 20px;
-}
-h1 {
-  text-align: center;
-  color: #4DB6AC;
-}
-p {
-  font-size: 18px;
-  line-height: 1.5;
-  margin-bottom: 20px;
-}
-a {
-  display: block;
-  text-align: center;
-  font-size: 24px;
-  color: #fff;
-  background-color: #4DB6AC;
-  border-radius: 5px;
-  padding: 10px;
-  width: 200px;
-  margin: 0 auto;
-  text-decoration: none;
-}
-a:hover {
-  background-color: #3a867f;
-}
-pre {
-  font-size: 16px;
-  line-height: 1.5;
-  margin-bottom: 20px;
-}
-.button{
-  left: calc(50% - 3em);
-  top: calc(50% - 2em);
-  transform-origin: 50% 5em;
-}
-a.button:not(:hover) {
-  animation: wiggle 2s linear infinite;
-}
 
-/* Keyframes */
-@keyframes wiggle {
-  0%, 7% {
-    transform: rotateZ(0);
-  }
-  15% {
-    transform: rotateZ(-10deg);
-  }
-  20% {
-    transform: rotateZ(5deg);
-  }
-  25% {
-    transform: rotateZ(-5deg);
-  }
-  30% {
-    transform: rotateZ(3deg);
-  }
-  35% {
-    transform: rotateZ(-2deg);
-  }
-  40%, 100% {
-    transform: rotateZ(0);
-  }
-}
-.loop-wrapper {
-  margin: 0 auto;
-  position: relative;
-  display: block;
-  width: 600px;
-  height: 250px;
-  overflow: hidden;
-  border-bottom: 3px solid #fff;
-  color: #fff;
-}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royyan Wibisono</title>
+  <meta name="description"
+    content="Royyan Wibisono is a software developer with expertise in Golang, Python, MongoDB, MySQL, WebSockets, and WebRTC.">
+  <meta name="keywords"
+    content="Royyan Wibisono, software developer, Golang, Python, MongoDB, MySQL, WebSockets, WebRTC">
+  <link rel="canonical" href="https://royyanwibisono.github.io/" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #262626;
+      color: #fff;
+    }
 
-.mountain {
-  position: absolute;
-  right: -900px;
-  bottom: -20px;
-  width: 2px;
-  height: 2px;
-  box-shadow: 
-    0 0 0 50px #4DB6AC,
-    60px 50px 0 70px #4DB6AC,
-    90px 90px 0 50px #4DB6AC,
-    250px 250px 0 50px #4DB6AC,
-    290px 320px 0 50px #4DB6AC,
-    320px 400px 0 50px #4DB6AC
-    ;
-  transform: rotate(130deg);
-  animation: mtn 20s linear infinite;
-}
-.hill {
-  position: absolute;
-  right: -900px;
-  bottom: -50px;
-  width: 400px;
-  border-radius: 50%;
-  height: 20px;
-  box-shadow: 
-    0 0 0 50px #4DB6AC,
-    -20px 0 0 20px #4DB6AC,
-    -90px 0 0 50px #4DB6AC,
-    250px 0 0 50px #4DB6AC,
-    290px 0 0 50px #4DB6AC,
-    620px 0 0 50px #4DB6AC;
-  animation: hill 4s 2s linear infinite;
-}
-.tree, .tree:nth-child(2), .tree:nth-child(3) {
-  position: absolute;
-  height: 100px; 
-  width: 35px;
-  bottom: 0;
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/tree.svg) no-repeat;
-}
-.rock {
-  margin-top: -17%;
-  height: 2%; 
-  width: 2%;
-  bottom: -2px;
-  border-radius: 20px;
-  position: absolute;
-  background: #ddd;
-}
-.truck, .wheels {
-  transition: all ease;
-  width: 85px;
-  margin-right: -60px;
-  bottom: 0px;
-  right: 70%;
-  position: absolute;
-  background: #eee;
-}
-.truck {
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/truck.svg) no-repeat;
-  background-size: contain;
-  height: 60px;
-}
-.truck:before {
-  content: " ";
-  position: absolute;
-  width: 25px;
-  box-shadow:
-    -30px 28px 0 1.5px #fff,
-    -35px 18px 0 1.5px #fff;
-}
-.wheels {
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/130015/wheels.svg) no-repeat;
-  height: 15px;
-  margin-bottom: 0;
-}
+    .container {
+      margin: 0 auto;
+      background-color: #1a1a1a;
+      border-radius: 10px;
+      box-shadow: 0 8px 10px rgba(0, 255, 213, 0.418);
+      max-width: 600px;
+      width: 90%;
+      overflow: hidden;
+    }
 
-.tree  { animation: tree 3s 0.000s linear infinite; }
-.tree:nth-child(2)  { animation: tree2 2s 0.150s linear infinite; }
-.tree:nth-child(3)  { animation: tree3 8s 0.050s linear infinite; }
-.rock  { animation: rock 4s   -0.755s linear infinite; }
-.truck  { animation: truck 4s   0.080s ease infinite; }
-.wheels  { animation: truck 4s   0.001s ease infinite; }
-.truck:before { animation: wind 1.5s   0.000s ease infinite; }
+    .card {
+      padding: 20px;
+    }
 
+    h1 {
+      text-align: center;
+      color: #4DB6AC;
+    }
 
-@keyframes tree {
-  0%   { transform: translate(1350px); }
-  50% {}
-  100% { transform: translate(-50px); }
-}
-@keyframes tree2 {
-  0%   { transform: translate(650px); }
-  50% {}
-  100% { transform: translate(-50px); }
-}
-@keyframes tree3 {
-  0%   { transform: translate(2750px); }
-  50% {}
-  100% { transform: translate(-50px); }
-}
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
 
-@keyframes rock {
-  0%   { right: -200px; }
-  100% { right: 2000px; }
-}
-@keyframes truck {
-  0%   { }
-  6%   { transform: translateY(0px); }
-  7%   { transform: translateY(-6px); }
-  9%   { transform: translateY(0px); }
-  10%   { transform: translateY(-1px); }
-  11%   { transform: translateY(0px); }
-  100%   { }
-}
-@keyframes wind {
-  0%   {  }
-  50%   { transform: translateY(3px) }
-  100%   { }
-}
-@keyframes mtn {
-  100% {
-    transform: translateX(-2000px) rotate(130deg);
-  }
-}
-@keyframes hill {
-  100% {
-    transform: translateX(-2000px);
-  }
-}
+    a {
+      display: block;
+      text-align: center;
+      font-size: 24px;
+      color: #fff;
+      background-color: #4DB6AC;
+      border-radius: 5px;
+      padding: 10px;
+      width: 200px;
+      margin: 0 auto;
+      text-decoration: none;
+    }
 
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="card">
-        <h1>Welcome to My Life!</h1>
-        
-        <p>Thank you for visiting my website! Click the link below to access my online Curriculum Vitae (CV):</p>
-        <br/>
-        <div>
-          <a class="button" href="https://royyanwibisono.github.io/tunatech">Royyan CV</a>
-        </div>
-      </div>
-      <br/>
-      <div class="loop-wrapper">
-        <div class="mountain"></div>
-        <div class="hill"></div>
-        <div class="tree"></div>
-        <div class="tree"></div>
-        <div class="tree"></div>
-        <div class="rock"></div>
-        <div class="truck"></div>
-        <div class="wheels"></div>
+    a:hover {
+      background-color: #3a867f;
+    }
+
+    pre {
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      left: calc(50% - 3em);
+      top: calc(50% - 2em);
+      transform-origin: 50% 5em;
+    }
+
+    a.button:not(:hover) {
+      animation: wiggle 2s linear infinite;
+    }
+
+    /* Keyframes */
+    @keyframes wiggle {
+
+      0%,
+      7% {
+        transform: rotateZ(0);
+      }
+
+      15% {
+        transform: rotateZ(-10deg);
+      }
+
+      20% {
+        transform: rotateZ(5deg);
+      }
+
+      25% {
+        transform: rotateZ(-5deg);
+      }
+
+      30% {
+        transform: rotateZ(3deg);
+      }
+
+      35% {
+        transform: rotateZ(-2deg);
+      }
+
+      40%,
+      100% {
+        transform: rotateZ(0);
+      }
+    }
+
+    .loop-wrapper {
+      margin: 0 auto;
+      position: relative;
+      display: block;
+      width: 600px;
+      height: 250px;
+      overflow: hidden;
+      border-bottom: 3px solid #fff;
+      color: #fff;
+    }
+
+    .mountain {
+      position: absolute;
+      right: -900px;
+      bottom: -20px;
+      width: 2px;
+      height: 2px;
+      box-shadow:
+        0 0 0 50px #4DB6AC,
+        60px 50px 0 70px #4DB6AC,
+        90px 90px 0 50px #4DB6AC,
+        250px 250px 0 50px #4DB6AC,
+        290px 320px 0 50px #4DB6AC,
+        320px 400px 0 50px #4DB6AC;
+      transform: rotate(130deg);
+      animation: mtn 20s linear infinite;
+    }
+
+    .hill {
+      position: absolute;
+      right: -900px;
+      bottom: -50px;
+      width: 400px;
+      border-radius: 50%;
+      height: 20px;
+      box-shadow:
+        0 0 0 50px #4DB6AC,
+        -20px 0 0 20px #4DB6AC,
+        -90px 0 0 50px #4DB6AC,
+        250px 0 0 50px #4DB6AC,
+        290px 0 0 50px #4DB6AC,
+        620px 0 0 50px #4DB6AC;
+      animation: hill 4s 2s linear infinite;
+    }
+
+    .tree,
+    .tree:nth-child(2),
+    .tree:nth-child(3) {
+      position: absolute;
+      height: 100px;
+      width: 35px;
+      bottom: 0;
+    }
+
+    .rock {
+      margin-top: -17%;
+      height: 2%;
+      width: 2%;
+      bottom: -2px;
+      border-radius: 20px;
+      position: absolute;
+      background: #ddd;
+    }
+
+    .truck,
+    .wheels {
+      transition: all ease;
+      width: 85px;
+      margin-right: -60px;
+      bottom: 0px;
+      right: 70%;
+      position: absolute;
+    }
+
+    .truck {
+      height: 60px;
+    }
+
+    .wheels {
+      height: 15px;
+      margin-bottom: 0;
+    }
+
+    .tree {
+      animation: tree 3s 0.000s linear infinite;
+    }
+
+    .tree:nth-child(2) {
+      animation: tree2 2s 0.150s linear infinite;
+    }
+
+    .tree:nth-child(3) {
+      animation: tree3 8s 0.050s linear infinite;
+    }
+
+    .rock {
+      animation: rock 4s -0.755s linear infinite;
+    }
+
+    .truck {
+      animation: truck 4s 0.080s ease infinite;
+    }
+
+    .wheels {
+      animation: truck 4s 0.001s ease infinite;
+    }
+
+    .truck:before {
+      content: " ";
+      position: absolute;
+      width: 25px;
+      box-shadow:
+        -30px 28px 0 1.5px #fff,
+        -35px 18px 0 1.5px #fff;
+      animation: wind 1.5s 0.000s ease infinite;
+    }
+
+    @keyframes tree {
+      0% {
+        transform: translate(1350px);
+      }
+
+      50% {}
+
+      100% {
+        transform: translate(-50px);
+      }
+    }
+
+    @keyframes tree2 {
+      0% {
+        transform: translate(650px);
+      }
+
+      50% {}
+
+      100% {
+        transform: translate(-50px);
+      }
+    }
+
+    @keyframes tree3 {
+      0% {
+        transform: translate(2750px);
+      }
+
+      50% {}
+
+      100% {
+        transform: translate(-50px);
+      }
+    }
+
+    @keyframes rock {
+      0% {
+        right: -200px;
+      }
+
+      100% {
+        right: 2000px;
+      }
+    }
+
+    @keyframes truck {
+      0% {}
+
+      6% {
+        transform: translateY(0px);
+      }
+
+      7% {
+        transform: translateY(-6px);
+      }
+
+      9% {
+        transform: translateY(0px);
+      }
+
+      10% {
+        transform: translateY(-1px);
+      }
+
+      11% {
+        transform: translateY(0px);
+      }
+
+      100% {}
+    }
+
+    @keyframes wind {
+      0% {}
+
+      50% {
+        transform: translateY(3px);
+      }
+
+      100% {}
+    }
+
+    @keyframes mtn {
+      100% {
+        transform: translateX(-2000px) rotate(130deg);
+      }
+    }
+
+    @keyframes hill {
+      100% {
+        transform: translateX(-2000px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Welcome to My Life!</h1>
+
+      <p>Thank you for visiting my website! Click the link below to access my online Curriculum Vitae (CV):</p>
+      <br />
+      <div>
+        <a class="button" href="https://royyanwibisono.github.io/tunatech">Royyan CV</a>
       </div>
     </div>
-  </body>
+    <br />
+    <div class="loop-wrapper">
+      <div class="mountain"></div>
+      <div class="hill"></div>
+
+      <div class="tree">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 100" width="100%" height="100%">
+          <polygon points="17.5,5 5,40 12,40 2,70 10,70 0,100 35,100 25,70 33,70 23,40 30,40" fill="#4DB6AC" />
+          <rect x="12" y="85" width="11" height="15" fill="#8D6E63" />
+        </svg>
+      </div>
+      <div class="tree">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 100" width="100%" height="100%">
+          <polygon points="17.5,5 5,40 12,40 2,70 10,70 0,100 35,100 25,70 33,70 23,40 30,40" fill="#4DB6AC" />
+          <rect x="12" y="85" width="11" height="15" fill="#8D6E63" />
+        </svg>
+      </div>
+      <div class="tree">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 100" width="100%" height="100%">
+          <polygon points="17.5,5 5,40 12,40 2,70 10,70 0,100 35,100 25,70 33,70 23,40 30,40" fill="#4DB6AC" />
+          <rect x="12" y="85" width="11" height="15" fill="#8D6E63" />
+        </svg>
+      </div>
+
+      <div class="rock"></div>
+
+      <!-- White Jeep Body with Proportional Wheel Arches -->
+      <div class="truck">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 60" width="100%" height="100%">
+          <!-- Main White Body with Smaller, Proportional Wheel Arches -->
+          <path d="M 5 50 
+                     L 5 32 
+                     L 14 32 
+                     L 14 16 
+                     L 48 16 
+                     L 54 26 
+                     L 74 26 
+                     L 74 50 
+                     L 78 50 
+                     L 78 46 
+                     L 73 46 
+                     A 8 8 0 0 0 57 46 
+                     L 28 46 
+                     A 8 8 0 0 0 12 46 
+                     L 5 46 
+                     L 5 50 Z" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1" stroke-linejoin="round" />
+
+          <!-- Windows -->
+          <path d="M 16 18 L 46 18 L 52 26 L 16 26 Z" fill="#B3E5FC" />
+
+          <!-- Door Details -->
+          <line x1="32" y1="18" x2="32" y2="46" stroke="#E0E0E0" stroke-width="1" />
+          <circle cx="34" cy="32" r="1.5" fill="#9E9E9E" />
+
+          <!-- Front Grille (Classic 7-slot Jeep style) -->
+          <rect x="71" y="28" width="4" height="16" fill="#333333" />
+          <line x1="71.5" y1="28" x2="71.5" y2="44" stroke="#FFFFFF" stroke-width="0.5" />
+          <line x1="72.2" y1="28" x2="72.2" y2="44" stroke="#FFFFFF" stroke-width="0.5" />
+          <line x1="72.9" y1="28" x2="72.9" y2="44" stroke="#FFFFFF" stroke-width="0.5" />
+          <line x1="73.6" y1="28" x2="73.6" y2="44" stroke="#FFFFFF" stroke-width="0.5" />
+          <line x1="74.3" y1="28" x2="74.3" y2="44" stroke="#FFFFFF" stroke-width="0.5" />
+
+          <!-- Headlight -->
+          <circle cx="73" cy="34" r="2.5" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1" />
+
+          <!-- Tail Light -->
+          <rect x="5" y="34" width="2" height="6" fill="#EF5350" />
+
+          <!-- Roof Rack / Roll Cage Hint -->
+          <line x1="14" y1="16" x2="48" y2="16" stroke="#333333" stroke-width="2" />
+          <line x1="24" y1="16" x2="24" y2="11" stroke="#333333" stroke-width="1.5" />
+          <line x1="38" y1="16" x2="38" y2="11" stroke="#333333" stroke-width="1.5" />
+          <line x1="24" y1="11" x2="38" y2="11" stroke="#333333" stroke-width="1.5" />
+
+          <!-- Bumpers -->
+          <rect x="3" y="40" width="4" height="6" fill="#757575" rx="1" />
+          <rect x="76" y="40" width="4" height="6" fill="#757575" rx="1" />
+        </svg>
+      </div>
+
+      <!-- Rugged Jeep Wheels -->
+      <div class="wheels">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 15" width="100%" height="100%">
+          <!-- Rear Tire -->
+          <circle cx="20" cy="7.5" r="7" fill="#1a1a1a" stroke="#E0E0E0" stroke-width="0.5" />
+          <circle cx="20" cy="7.5" r="4" fill="#9E9E9E" />
+          <circle cx="20" cy="7.5" r="1.5" fill="#424242" />
+          <!-- Rear Tread Details -->
+          <path d="M 20 0.5 L 20 3" stroke="#1a1a1a" stroke-width="1" />
+          <path d="M 20 12 L 20 14.5" stroke="#1a1a1a" stroke-width="1" />
+          <path d="M 13 7.5 L 15 7.5" stroke="#1a1a1a" stroke-width="1" />
+          <path d="M 25 7.5 L 27 7.5" stroke="#1a1a1a" stroke-width="1" />
+
+          <!-- Front Tire -->
+          <circle cx="65" cy="7.5" r="7" fill="#1a1a1a" stroke="#E0E0E0" stroke-width="0.5" />
+          <circle cx="65" cy="7.5" r="4" fill="#9E9E9E" />
+          <circle cx="65" cy="7.5" r="1.5" fill="#424242" />
+          <!-- Front Tread Details -->
+          <path d="M 65 0.5 L 65 3" stroke="#1a1a1a" stroke-width="1" />
+          <path d="M 65 12 L 65 14.5" stroke="#1a1a1a" stroke-width="1" />
+          <path d="M 58 7.5 L 60 7.5" stroke="#1a1a1a" stroke-width="1" />
+          <path d="M 70 7.5 L 72 7.5" stroke="#1a1a1a" stroke-width="1" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
