@@ -1,14 +1,20 @@
 {
   "files": {
-    "main.css": "/tunatech/static/css/main.3b049b21.css",
-    "main.js": "/tunatech/static/js/main.0f8d4ef2.js",
+    "main.css": "/tunatech/static/css/main.5f26335d.css",
+    "main.js": "/tunatech/static/js/main.2df60aaf.js",
+    "static/media/satunol (4).png": "/tunatech/static/media/satunol (4).363dc7cab9628f21c2eb.png",
     "static/media/ijazahpolban.png": "/tunatech/static/media/ijazahpolban.9fdd0909de1c33f8e1f7.png",
+    "static/media/pama.png": "/tunatech/static/media/pama.63c5a30cedd708d38868.png",
     "static/media/finalproject.png": "/tunatech/static/media/finalproject.b1e3866fd9c38d3737d0.png",
+    "static/media/sawit01.png": "/tunatech/static/media/sawit01.e3ce4ecd4defd950175d.png",
+    "static/media/sawit02.png": "/tunatech/static/media/sawit02.9158961202e6de6ed530.png",
     "static/media/penyatu (4).png": "/tunatech/static/media/penyatu (4).4bad860ad3d8f66b5202.png",
     "static/media/android_clock (3).png": "/tunatech/static/media/android_clock (3).79d91b96d77e6f7e2f4b.png",
     "static/media/android_clock (2).png": "/tunatech/static/media/android_clock (2).12f2d6d88553da3ceed6.png",
     "static/media/Astro.png": "/tunatech/static/media/Astro.e507581ea65bd901208b.png",
     "static/media/newssc.png": "/tunatech/static/media/newssc.c9374ce2ce3a88e06f22.png",
+    "static/media/satunol (1).png": "/tunatech/static/media/satunol (1).79af9d22ce271dbe5eed.png",
+    "static/media/satunol (3).png": "/tunatech/static/media/satunol (3).da713f7ec098896e9595.png",
     "static/media/pp.jpg": "/tunatech/static/media/pp.b98f593038d205569efb.jpg",
     "static/media/tawafclock3.png": "/tunatech/static/media/tawafclock3.42fa009ff26e8f4c94b6.png",
     "static/media/tawafclock1.png": "/tunatech/static/media/tawafclock1.5ae45ca5271d99c0178f.png",
@@ -20,13 +26,11 @@
     "static/media/eltraingraph (3).png": "/tunatech/static/media/eltraingraph (3).fafbf9469ece8bef7c7e.png",
     "static/media/penyatu (2).png": "/tunatech/static/media/penyatu (2).d442db717c36aa87ffe9.png",
     "static/media/tawafclock2.png": "/tunatech/static/media/tawafclock2.74d89357685b91d24c7b.png",
-    "static/media/satunol (4).png": "/tunatech/static/media/satunol (4).ce6160e0803feb209c16.png",
     "static/media/penyatu (1).png": "/tunatech/static/media/penyatu (1).0e812d870d2ba6fdca99.png",
     "static/media/newtss (2).jpg": "/tunatech/static/media/newtss (2).e8df8e6ea4457907167a.jpg",
     "static/media/newtss (3).jpg": "/tunatech/static/media/newtss (3).86ed3ccd8f823cb76f04.jpg",
+    "static/media/sawit03.png": "/tunatech/static/media/sawit03.b43202345c2706bdb9d5.png",
     "static/media/stars.png": "/tunatech/static/media/stars.f3046c8af4099bd2dc34.png",
-    "static/media/satunol (3).png": "/tunatech/static/media/satunol (3).4d8e8c8d59f987cdd437.png",
-    "static/media/satunol (1).png": "/tunatech/static/media/satunol (1).ba4e0981d0af2fe4db0d.png",
     "static/media/crimson-base-01.png": "/tunatech/static/media/crimson-base-01.abe50e326f9d01da92fc.png",
     "static/media/crimson-main-01.png": "/tunatech/static/media/crimson-main-01.f31cbca405445686bc1e.png",
     "static/media/pcvue (2).png": "/tunatech/static/media/pcvue (2).bbd613ceb3cfb378d027.png",
@@ -54,7 +58,7 @@
     "static/media/vite.svg": "/tunatech/static/media/vite.b30f410b464ac887c73c06e31add7f64.svg"
   },
   "entrypoints": [
-    "static/css/main.3b049b21.css",
-    "static/js/main.0f8d4ef2.js"
+    "static/css/main.5f26335d.css",
+    "static/js/main.2df60aaf.js"
   ]
 }
