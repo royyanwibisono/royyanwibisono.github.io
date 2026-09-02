@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/tunatech/static/css/main.5f26335d.css",
-    "main.js": "/tunatech/static/js/main.2df60aaf.js",
+    "main.js": "/tunatech/static/js/main.5d4183ce.js",
     "static/media/satunol (4).png": "/tunatech/static/media/satunol (4).363dc7cab9628f21c2eb.png",
     "static/media/ijazahpolban.png": "/tunatech/static/media/ijazahpolban.9fdd0909de1c33f8e1f7.png",
     "static/media/pama.png": "/tunatech/static/media/pama.63c5a30cedd708d38868.png",
@@ -59,6 +59,6 @@
   },
   "entrypoints": [
     "static/css/main.5f26335d.css",
-    "static/js/main.2df60aaf.js"
+    "static/js/main.5d4183ce.js"
   ]
 }
