@@ -13,7 +13,13 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/style.css">
   <style>
+    /* Reset body to use flex and center everything */
     body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-family: Arial, sans-serif;
       background-color: #262626;
       color: #fff;
@@ -31,6 +37,12 @@
 
     .card {
       padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      text-align: center;
     }
 
     h1 {
@@ -327,9 +339,21 @@
 <body>
   <div class="container">
     <div class="card">
-      <h1>Signal Found!</h1>
-
-      <p>After travales acros multiverse don't miss out the chance! Click the link below to access operator profile:</p>
+      <!-- Heading with a 'glitch' vibe -->
+      <h1 style="text-shadow: 0 0 10px #ff7700, 0 0 20px #ff7700, 0 0 40px #ff7700;">
+        ⚡ SIGNAL ACQUIRED
+      </h1>
+      
+      <!-- Engaging, cryptic copy -->
+      <p style="font-size: 18px; line-height: 1.6; margin-bottom: 20px; letter-spacing: 0.5px;">
+        <span style="color: #ff7700; font-weight: bold;">Multiverse traversal complete.</span><br>
+        Operator credentials verified.<br>
+        <span style="color: #aaa; font-style: italic;">One final handshake required.</span>
+      </p>
+      <p style="font-size: 15px; color: #888; margin-top: -10px;">
+        <span style="background: #ff7700; color: #1a1a1a; padding: 0 8px; border-radius: 3px;">UNLOCK</span> the profile
+        below.
+      </p>
       <br />
       <div>
         <a class="button" href="https://royyanwibisono.github.io/tunatech">Royyan CV</a>
