@@ -11,127 +11,434 @@
     content="Royyan Wibisono, software developer, Golang, Python, MongoDB, MySQL, WebSockets, WebRTC">
   <link rel="canonical" href="https://royyanwibisono.github.io/" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Retro pixel font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="/style.css">
+
   <style>
-    /* Reset body to use flex and center everything */
     body {
       margin: 0;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
-      background-color: #262626;
+      font-family: "Press Start 2P", "Courier New", monospace;
       color: #fff;
+      background:
+        radial-gradient(circle at 70% 15%,
+          rgba(155, 57, 29, .25),
+          transparent 32%),
+        linear-gradient(180deg, #120807, #24100c);
     }
 
     .container {
+      position: relative;
       margin: 0 auto;
-      background-color: #1a1a1a;
-      border-radius: 10px;
-      box-shadow: 0 8px 10px rgba(255, 127, 22, 0.772);
+      background:
+        linear-gradient(180deg, rgba(15, 6, 5, .98), rgba(26, 11, 8, .98));
+      border: 4px solid #ff7700;
+      border-radius: 0;
+      box-shadow:
+        0 0 0 2px #351106,
+        0 0 0 6px #160704,
+        8px 8px 0 rgba(0, 0, 0, .55),
+        0 0 35px rgba(255, 119, 0, .22);
       max-width: 600px;
       width: 90%;
       overflow: hidden;
     }
 
+    /* Subtle retro CRT scanlines */
+    .container::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(0deg,
+          rgba(0, 0, 0, .10) 0 1px,
+          transparent 1px 3px);
+      opacity: .18;
+      mix-blend-mode: multiply;
+    }
+
+    /* ============================= */
+    /* NATURAL STAR LAYER            */
+    /* ============================= */
+
+    .star-sky {
+      position: absolute;
+      inset: -2px;
+      pointer-events: none;
+      z-index: 1;
+      background-image:
+        radial-gradient(circle, rgba(255, 255, 255, .72) 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255, 255, 255, .48) 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255, 224, 178, .32) 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(178, 214, 255, .28) 1px, transparent 1.8px);
+      background-repeat: repeat;
+      background-size:
+        233px 251px,
+        311px 293px,
+        397px 373px,
+        491px 449px;
+      background-position:
+        19px 37px,
+        83px 61px,
+        149px 127px,
+        211px 89px;
+      animation: starTwinkle 7s ease-in-out infinite alternate;
+    }
+
+    .star-sky--scene {
+      -webkit-mask-image:
+        linear-gradient(to bottom,
+          rgba(0, 0, 0, .95) 0%,
+          rgba(0, 0, 0, .82) 58%,
+          rgba(0, 0, 0, .30) 78%,
+          transparent 92%);
+      mask-image:
+        linear-gradient(to bottom,
+          rgba(0, 0, 0, .95) 0%,
+          rgba(0, 0, 0, .82) 58%,
+          rgba(0, 0, 0, .30) 78%,
+          transparent 92%);
+    }
+
+    @keyframes starTwinkle {
+      0% {
+        opacity: .22;
+      }
+
+      100% {
+        opacity: .58;
+      }
+    }
+
+    /* ============================= */
+    /* CARD / RETRO GAME UI          */
+    /* ============================= */
+
     .card {
-      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      padding: 28px 20px 26px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 300px;
+      min-height: 330px;
       text-align: center;
     }
 
-    h1 {
-      text-align: center;
+    .card>* {
+      position: relative;
+      z-index: 2;
+    }
+
+    .card>.star-sky {
+      position: absolute;
+      z-index: 1;
+    }
+
+    .hud {
+      margin: 0 0 16px;
+      font-size: 8px;
+      line-height: 1.8;
+      color: #ffd18a;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow:
+        1px 1px 0 #000,
+        0 0 8px rgba(255, 140, 0, .25);
+    }
+
+    h1.retro-title {
+      margin: 0 0 18px;
+      font-size: clamp(16px, 4vw, 26px);
+      line-height: 1.55;
+      color: #ffb347;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow:
+        2px 2px 0 #7a2c00,
+        4px 4px 0 #1a0702,
+        0 0 14px rgba(255, 119, 0, .45);
+      animation: titleFlicker 3.2s steps(2) infinite;
+    }
+
+    h1.retro-title::after {
+      content: "▌";
+      margin-left: 8px;
       color: #ff7700;
+      animation: blink 1.05s steps(1) infinite;
     }
 
-    p {
-      font-size: 18px;
-      line-height: 1.5;
-      margin-bottom: 20px;
+    .retro-dialog {
+      margin: 0 0 14px;
+      font-size: 9px;
+      line-height: 2.15;
+      color: #ffe0b2;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, .85);
     }
 
-    a {
-      display: block;
-      text-align: center;
-      font-size: 24px;
-      color: #fff;
-      background-color: #ff7700;
-      border-radius: 5px;
-      padding: 10px;
-      width: 200px;
+    .retro-dialog .accent {
+      color: #ff8c1a;
+    }
+
+    .retro-dialog .dim {
+      color: #b48a68;
+    }
+
+    .retro-hint {
+      margin: 0 0 20px;
+      font-size: 8px;
+      line-height: 1.8;
+      color: #9dff6f;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow:
+        0 0 6px rgba(70, 255, 110, .35),
+        1px 1px 0 #000;
+      animation: blink 1.2s steps(1) infinite;
+    }
+
+    a.button.retro-button {
+      display: inline-block;
+      width: auto;
+      min-width: 220px;
       margin: 0 auto;
+      padding: 14px 18px 12px;
+      font-family: inherit;
+      font-size: 11px;
+      line-height: 1;
       text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #190803;
+      background:
+        linear-gradient(180deg,
+          #ffa04d,
+          #ff7700 48%,
+          #e35f00);
+      border: 3px solid #ffe3bd;
+      border-radius: 0;
+      box-shadow:
+        0 0 0 2px #662404,
+        5px 5px 0 #380f03,
+        inset 2px 2px 0 #ffd29b,
+        inset -3px -3px 0 #b34a00;
+      transition:
+        transform .06s steps(1),
+        box-shadow .06s steps(1),
+        background .12s steps(1);
     }
 
-    a:hover {
-      background-color: #cc5f00;
+    a.button.retro-button:not(:hover) {
+      animation: buttonPulse 1.8s steps(2) infinite;
     }
 
-    pre {
-      font-size: 16px;
-      line-height: 1.5;
-      margin-bottom: 20px;
+    a.button.retro-button:hover {
+      background:
+        linear-gradient(180deg,
+          #ffb46f,
+          #ff8c22 48%,
+          #f06d0e);
+      transform: translate(2px, 2px);
+      box-shadow:
+        0 0 0 2px #662404,
+        3px 3px 0 #380f03,
+        inset 2px 2px 0 #ffe0bd,
+        inset -3px -3px 0 #b34a00;
     }
 
-    .button {
-      left: calc(50% - 3em);
-      top: calc(50% - 2em);
-      transform-origin: 50% 5em;
+    a.button.retro-button:active {
+      transform: translate(5px, 5px);
+      box-shadow:
+        0 0 0 2px #662404,
+        0 0 0 #380f03,
+        inset 2px 2px 0 #ffd29b,
+        inset -3px -3px 0 #b34a00;
     }
 
-    a.button:not(:hover) {
-      animation: wiggle 2s linear infinite;
+    a.button.retro-button:focus-visible {
+      outline: 3px dashed #ffcc77;
+      outline-offset: 3px;
     }
 
-    /* Keyframes */
-    @keyframes wiggle {
+    @keyframes blink {
 
       0%,
-      7% {
-        transform: rotateZ(0);
+      49% {
+        opacity: 1;
       }
 
-      15% {
-        transform: rotateZ(-10deg);
-      }
-
-      20% {
-        transform: rotateZ(5deg);
-      }
-
-      25% {
-        transform: rotateZ(-5deg);
-      }
-
-      30% {
-        transform: rotateZ(3deg);
-      }
-
-      35% {
-        transform: rotateZ(-2deg);
-      }
-
-      40%,
+      50%,
       100% {
-        transform: rotateZ(0);
+        opacity: 0;
       }
     }
 
+    @keyframes titleFlicker {
+
+      0%,
+      91%,
+      100% {
+        opacity: 1;
+      }
+
+      92%,
+      94% {
+        opacity: .62;
+      }
+
+      95% {
+        opacity: 1;
+      }
+
+      96%,
+      97% {
+        opacity: .75;
+      }
+    }
+
+    @keyframes buttonPulse {
+
+      0%,
+      100% {
+        filter: brightness(1);
+      }
+
+      50% {
+        filter: brightness(1.14);
+      }
+    }
+
+    /* ============================= */
+    /* MARS SCENE                    */
+    /* ============================= */
+
     .loop-wrapper {
-      margin: 0 auto;
       position: relative;
+      margin: 0 auto;
       display: block;
-      width: 600px;
+      width: 100%;
+      max-width: 600px;
       height: 250px;
       overflow: hidden;
-      border-bottom: 3px solid #fff;
+
+      /* removed horizontal borders */
+      border: none;
+
       color: #fff;
+      background:
+        linear-gradient(180deg,
+          #160b07 0%,
+          #3f180d 45%,
+          #8a3413 75%,
+          #c1551e 100%);
+    }
+
+    .loop-wrapper>* {
+      z-index: 2;
+    }
+
+    .loop-wrapper>.star-sky {
+      z-index: 1;
+    }
+
+    .loop-wrapper svg {
+      display: block;
+    }
+
+    .sun {
+      position: absolute;
+      top: 42px;
+      right: 85px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fde8c8;
+      box-shadow: 0 0 20px 5px rgba(253, 232, 200, 0.4);
+    }
+
+    /* Shooting stars */
+    .shooting-star,
+    .shooting-star-2 {
+      position: absolute;
+      background: linear-gradient(90deg, transparent, #fff);
+      right: -100px;
+      opacity: 0;
+      border-radius: 2px;
+      box-shadow: 0 0 4px #fff;
+    }
+
+    .shooting-star {
+      width: 80px;
+      height: 2px;
+      top: 40px;
+      transform: rotate(-35deg);
+      animation: shoot 10s linear infinite;
+    }
+
+    .shooting-star-2 {
+      width: 60px;
+      height: 1.5px;
+      top: 100px;
+      right: -50px;
+      transform: rotate(-40deg);
+      animation: shoot2 16s linear infinite;
+      animation-delay: 6s;
+      box-shadow: 0 0 3px #fff;
+    }
+
+    @keyframes shoot {
+      0% {
+        transform: rotate(-35deg) translateX(0);
+        opacity: 0;
+      }
+
+      2% {
+        opacity: 1;
+      }
+
+      12% {
+        transform: rotate(-35deg) translateX(-700px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: rotate(-35deg) translateX(-700px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes shoot2 {
+      0% {
+        transform: rotate(-40deg) translateX(0);
+        opacity: 0;
+      }
+
+      2% {
+        opacity: 1;
+      }
+
+      10% {
+        transform: rotate(-40deg) translateX(-700px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: rotate(-40deg) translateX(-700px);
+        opacity: 0;
+      }
     }
 
     .mountain {
@@ -141,14 +448,14 @@
       width: 2px;
       height: 2px;
       box-shadow:
-        0 0 0 50px #ff7700,
-        60px 50px 0 70px #ff7700,
-        90px 90px 0 50px #ff7700,
-        250px 250px 0 50px #ff7700,
-        290px 320px 0 50px #ff7700,
-        320px 400px 0 50px #ff7700;
+        0 0 0 50px #67240e,
+        60px 50px 0 70px #67240e,
+        90px 90px 0 50px #67240e,
+        250px 250px 0 50px #67240e,
+        290px 320px 0 50px #67240e,
+        320px 400px 0 50px #67240e;
       transform: rotate(130deg);
-      animation: mtn 20s linear infinite;
+      animation: mtn 60s linear infinite;
     }
 
     .hill {
@@ -159,22 +466,21 @@
       border-radius: 50%;
       height: 20px;
       box-shadow:
-        0 0 0 50px #ff7700,
-        -20px 0 0 20px #ff7700,
-        -90px 0 0 50px #ff7700,
-        250px 0 0 50px #ff7700,
-        290px 0 0 50px #ff7700,
-        620px 0 0 50px #ff7700;
-      animation: hill 4s 2s linear infinite;
+        0 0 0 50px #4a1a0a,
+        -20px 0 0 20px #4a1a0a,
+        -90px 0 0 50px #4a1a0a,
+        250px 0 0 50px #4a1a0a,
+        290px 0 0 50px #4a1a0a,
+        520px 0 0 50px #4a1a0a;
+      animation: hill 12s 6s linear infinite;
     }
 
-    .tree,
-    .tree:nth-child(2),
-    .tree:nth-child(3) {
+    .rock-pile {
       position: absolute;
       height: 100px;
       width: 35px;
       bottom: 0;
+      transform-origin: 50% 100%;
     }
 
     .rock {
@@ -184,10 +490,10 @@
       bottom: -2px;
       border-radius: 20px;
       position: absolute;
-      background: #ddd;
+      background: #d18a5a;
     }
 
-    .truck,
+    .rover,
     .wheels {
       transition: all ease;
       width: 85px;
@@ -197,7 +503,7 @@
       position: absolute;
     }
 
-    .truck {
+    .rover {
       height: 60px;
     }
 
@@ -206,73 +512,74 @@
       margin-bottom: 0;
     }
 
-    .tree {
-      animation: tree 3s 0.000s linear infinite;
+    .rock-pile-1 {
+      animation: rock-pile-1 9s 0.000s linear infinite;
     }
 
-    .tree:nth-child(2) {
-      animation: tree2 2s 0.150s linear infinite;
+    .rock-pile-2 {
+      animation: rock-pile-2 6s 0.450s linear infinite;
+      filter: brightness(1.15);
     }
 
-    .tree:nth-child(3) {
-      animation: tree3 8s 0.050s linear infinite;
+    .rock-pile-3 {
+      animation: rock-pile-3 24s 0.150s linear infinite;
     }
 
     .rock {
-      animation: rock 4s -0.755s linear infinite;
+      animation: rock 12s -2.265s linear infinite;
     }
 
-    .truck {
-      animation: truck 4s 0.080s ease infinite;
+    .rover {
+      animation: rover 12s 0.240s ease infinite;
     }
 
     .wheels {
-      animation: truck 4s 0.001s ease infinite;
+      animation: rover 12s 0.003s ease infinite;
     }
 
-    .truck:before {
+    .wheel {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: spin 3.6s linear infinite;
+    }
+
+    .rover:before {
       content: " ";
       position: absolute;
       width: 25px;
       box-shadow:
-        -30px 28px 0 1.5px #fff,
-        -35px 18px 0 1.5px #fff;
-      animation: wind 1.5s 0.000s ease infinite;
+        -30px 28px 0 1.5px #f7dcb8,
+        -35px 18px 0 1.5px #f7dcb8;
+      animation: wind 4.5s 0.000s ease infinite;
     }
 
-    @keyframes tree {
+    @keyframes rock-pile-1 {
       0% {
-        transform: translate(1350px);
+        transform: translateX(1350px);
       }
-
-      50% {}
 
       100% {
-        transform: translate(-50px);
-      }
-    }
-
-    @keyframes tree2 {
-      0% {
-        transform: translate(650px);
-      }
-
-      50% {}
-
-      100% {
-        transform: translate(-50px);
+        transform: translateX(-50px);
       }
     }
 
-    @keyframes tree3 {
+    @keyframes rock-pile-2 {
       0% {
-        transform: translate(2750px);
+        transform: translateX(650px) scale(0.65);
       }
 
-      50% {}
+      100% {
+        transform: translateX(-50px) scale(0.65);
+      }
+    }
+
+    @keyframes rock-pile-3 {
+      0% {
+        transform: translateX(2750px) scale(1.25);
+      }
 
       100% {
-        transform: translate(-50px);
+        transform: translateX(-50px) scale(1.25);
       }
     }
 
@@ -286,7 +593,7 @@
       }
     }
 
-    @keyframes truck {
+    @keyframes rover {
       0% {}
 
       6% {
@@ -333,134 +640,215 @@
         transform: translateX(-2000px);
       }
     }
+
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hud {
+        font-size: 7px;
+        letter-spacing: 1px;
+      }
+
+      .retro-dialog {
+        font-size: 8px;
+        line-height: 2.05;
+      }
+
+      .retro-hint {
+        font-size: 7px;
+      }
+
+      a.button.retro-button {
+        min-width: 190px;
+        font-size: 10px;
+      }
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
     <div class="card">
-      <!-- Heading with a 'glitch' vibe -->
-      <h1 style="text-shadow: 0 0 10px #ff7700, 0 0 20px #ff7700, 0 0 40px #ff7700;">
-        ⚡ SIGNAL ACQUIRED
-      </h1>
-      
-      <!-- Engaging, cryptic copy -->
-      <p style="font-size: 18px; line-height: 1.6; margin-bottom: 20px; letter-spacing: 0.5px;">
-        <span style="color: #ff7700; font-weight: bold;">Multiverse traversal complete.</span><br>
+      <!-- Natural star layer -->
+      <div class="star-sky" aria-hidden="true"></div>
+
+      <p class="hud">Mission Log :: Mars Sector 7</p>
+
+      <h1 class="retro-title">Signal Acquired</h1>
+
+      <p class="retro-dialog">
+        <span class="accent">Multiverse traversal complete.</span><br>
         Operator credentials verified.<br>
-        <span style="color: #aaa; font-style: italic;">One final handshake required.</span>
+        <span class="dim">One final handshake required.</span>
       </p>
-      <p style="font-size: 15px; color: #888; margin-top: -10px;">
-        <span style="background: #ff7700; color: #1a1a1a; padding: 0 8px; border-radius: 3px;">UNLOCK</span> the profile
-        below.
-      </p>
-      <br />
-      <div>
-        <a class="button" href="https://royyanwibisono.github.io/tunatech">Royyan CV</a>
-      </div>
+
+      <p class="retro-hint">Insert coin to unlock profile</p>
+
+      <a class="button retro-button" href="https://royyanwibisono.github.io/tunatech">
+        ▶ Royyan CV
+      </a>
     </div>
-    <br />
+
     <div class="loop-wrapper">
+      <!-- Natural scene star layer -->
+      <div class="star-sky star-sky--scene" aria-hidden="true"></div>
+
+      <!-- Shooting stars -->
+      <div class="shooting-star" aria-hidden="true"></div>
+      <div class="shooting-star-2" aria-hidden="true"></div>
+
+      <!-- Pale, distant Martian sun -->
+      <div class="sun"></div>
+
       <div class="mountain"></div>
       <div class="hill"></div>
 
-      <div class="tree">
+      <!-- Piles of rocks drifting past -->
+      <div class="rock-pile rock-pile-1">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 100" width="100%" height="100%">
-          <polygon points="17.5,5 5,40 12,40 2,70 10,70 0,100 35,100 25,70 33,70 23,40 30,40" fill="#ff7700" />
-          <rect x="12" y="85" width="11" height="15" fill="#8D6E63" />
+          <polygon points="1,100 5,76 14,80 16,100" fill="#8a4a2e" />
+          <polygon points="13,100 19,68 30,84 31,100" fill="#7a3d26" />
+          <ellipse cx="28" cy="94" rx="7" ry="6" fill="#93542f" />
+          <polygon points="8,100 12,84 20,88 22,100" fill="#a05f38" />
+          <ellipse cx="6" cy="98" rx="5" ry="4" fill="#b06a3e" />
+          <polygon points="12,84 17,87 13,91" fill="#c9825a" />
+          <polygon points="19,68 25,80 21,82" fill="#b57048" />
+          <circle cx="33" cy="99" r="2" fill="#8a4a2e" />
+          <circle cx="3" cy="99" r="1.5" fill="#a05f38" />
         </svg>
       </div>
-      <div class="tree">
+
+      <div class="rock-pile rock-pile-2">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 100" width="100%" height="100%">
-          <polygon points="17.5,5 5,40 12,40 2,70 10,70 0,100 35,100 25,70 33,70 23,40 30,40" fill="#ff7700" />
-          <rect x="12" y="85" width="11" height="15" fill="#8D6E63" />
+          <polygon points="1,100 5,76 14,80 16,100" fill="#8a4a2e" />
+          <polygon points="13,100 19,68 30,84 31,100" fill="#7a3d26" />
+          <ellipse cx="28" cy="94" rx="7" ry="6" fill="#93542f" />
+          <polygon points="8,100 12,84 20,88 22,100" fill="#a05f38" />
+          <ellipse cx="6" cy="98" rx="5" ry="4" fill="#b06a3e" />
+          <polygon points="12,84 17,87 13,91" fill="#c9825a" />
+          <polygon points="19,68 25,80 21,82" fill="#b57048" />
+          <circle cx="33" cy="99" r="2" fill="#8a4a2e" />
+          <circle cx="3" cy="99" r="1.5" fill="#a05f38" />
         </svg>
       </div>
-      <div class="tree">
+
+      <div class="rock-pile rock-pile-3">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 100" width="100%" height="100%">
-          <polygon points="17.5,5 5,40 12,40 2,70 10,70 0,100 35,100 25,70 33,70 23,40 30,40" fill="#ff7700" />
-          <rect x="12" y="85" width="11" height="15" fill="#8D6E63" />
+          <polygon points="1,100 5,76 14,80 16,100" fill="#8a4a2e" />
+          <polygon points="13,100 19,68 30,84 31,100" fill="#7a3d26" />
+          <ellipse cx="28" cy="94" rx="7" ry="6" fill="#93542f" />
+          <polygon points="8,100 12,84 20,88 22,100" fill="#a05f38" />
+          <ellipse cx="6" cy="98" rx="5" ry="4" fill="#b06a3e" />
+          <polygon points="12,84 17,87 13,91" fill="#c9825a" />
+          <polygon points="19,68 25,80 21,82" fill="#b57048" />
+          <circle cx="33" cy="99" r="2" fill="#8a4a2e" />
+          <circle cx="3" cy="99" r="1.5" fill="#a05f38" />
         </svg>
       </div>
 
       <div class="rock"></div>
 
-      <!-- White Jeep Body with Proportional Wheel Arches -->
-      <div class="truck">
+      <!-- Mars Rover Body -->
+      <div class="rover">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 60" width="100%" height="100%">
-          <!-- Main White Body with Smaller, Proportional Wheel Arches -->
-          <path d="M 5 50 
-                     L 5 32 
-                     L 14 32 
-                     L 14 16 
-                     L 48 16 
-                     L 54 26 
-                     L 74 26 
-                     L 74 50 
-                     L 78 50 
-                     L 78 46 
-                     L 73 46 
-                     A 8 8 0 0 0 57 46 
-                     L 28 46 
-                     A 8 8 0 0 0 12 46 
-                     L 5 46 
-                     L 5 50 Z" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1" stroke-linejoin="round" />
+          <g fill="none" stroke="#8a8a8a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M 40 34 L 29 45" />
+            <path d="M 15 52 L 29 45 L 43 52" />
+            <path d="M 56 34 L 63 45 L 71 52" />
+          </g>
 
-          <!-- Windows -->
-          <path d="M 16 18 L 46 18 L 52 26 L 16 26 Z" fill="#B3E5FC" />
+          <circle cx="29" cy="45" r="2" fill="#6e6e6e" />
+          <circle cx="63" cy="45" r="1.5" fill="#6e6e6e" />
+          <circle cx="15" cy="52" r="2" fill="#6e6e6e" />
+          <circle cx="43" cy="52" r="2" fill="#6e6e6e" />
+          <circle cx="71" cy="52" r="2" fill="#6e6e6e" />
 
-          <!-- Door Details -->
-          <line x1="32" y1="18" x2="32" y2="46" stroke="#E0E0E0" stroke-width="1" />
-          <circle cx="34" cy="32" r="1.5" fill="#9E9E9E" />
+          <rect x="8" y="21" width="10" height="9" rx="1.5" fill="#e0e0e0" stroke="#bdbdbd" stroke-width="0.5" />
+          <rect x="9.5" y="23.5" width="7" height="4" fill="#c9a227" />
 
-          <!-- Front Grille (Classic 7-slot Jeep style) -->
-          <rect x="72" y="25" width="6" height="20" fill="#ababab" />
-          <line x1="71.5" y1="28" x2="71.5" y2="44" stroke="#FFFFFF" stroke-width="0.5" />
-          <line x1="72.2" y1="28" x2="72.2" y2="44" stroke="#FFFFFF" stroke-width="0.5" />
-          <line x1="72.9" y1="28" x2="72.9" y2="44" stroke="#FFFFFF" stroke-width="0.5" />
-          <line x1="73.6" y1="28" x2="73.6" y2="44" stroke="#FFFFFF" stroke-width="0.5" />
-          <line x1="74.3" y1="28" x2="74.3" y2="44" stroke="#FFFFFF" stroke-width="0.5" />
+          <rect x="17" y="19" width="47" height="17" rx="2" fill="#f5f5f5" stroke="#cfcfcf" stroke-width="1" />
+          <line x1="17" y1="22.5" x2="64" y2="22.5" stroke="#cfcfcf" stroke-width="0.5" />
 
-          <!-- Headlight -->
-          <circle cx="73" cy="34" r="2.5" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1" />
+          <rect x="22" y="24.5" width="11" height="8" fill="#d4a017" stroke="#b8860b" stroke-width="0.5" />
+          <line x1="24" y1="27" x2="31" y2="27" stroke="#b8860b" stroke-width="0.5" />
+          <line x1="24" y1="29.5" x2="31" y2="29.5" stroke="#b8860b" stroke-width="0.5" />
 
-          <!-- Tail Light -->
-          <rect x="5" y="34" width="2" height="6" fill="#EF5350" />
+          <rect x="38" y="25" width="9" height="5" fill="#d9d9d9" />
+          <line x1="40" y1="25" x2="40" y2="30" stroke="#bdbdbd" stroke-width="0.5" />
+          <line x1="42.5" y1="25" x2="42.5" y2="30" stroke="#bdbdbd" stroke-width="0.5" />
+          <line x1="45" y1="25" x2="45" y2="30" stroke="#bdbdbd" stroke-width="0.5" />
 
-          <!-- Roof Rack / Roll Cage Hint -->
-          <line x1="14" y1="16" x2="48" y2="16" stroke="#ababab" stroke-width="2" />>
-          <line x1="24" y1="16" x2="24" y2="11" stroke="#ababab" stroke-width="1.5" />
-          <line x1="38" y1="16" x2="38" y2="11" stroke="#ababab" stroke-width="1.5" />
-          <line x1="24" y1="11" x2="38" y2="11" stroke="#ababab" stroke-width="1.5" />
+          <line x1="30" y1="19" x2="30" y2="13.5" stroke="#9e9e9e" stroke-width="1.2" />
+          <ellipse cx="30" cy="12.5" rx="6" ry="2.4" fill="#d9d9d9" stroke="#9e9e9e" stroke-width="0.6" />
+          <circle cx="30" cy="12.5" r="1" fill="#6e6e6e" />
 
-          <!-- Bumpers -->
-          <rect x="3" y="40" width="4" height="6" fill="#757575" rx="1" />
-          <rect x="76" y="40" width="4" height="6" fill="#757575" rx="1" />
+          <line x1="58" y1="19" x2="61" y2="14.5" stroke="#9e9e9e" stroke-width="1.2" />
+          <circle cx="61" cy="14" r="1" fill="#9e9e9e" />
+
+          <rect x="51" y="4" width="3" height="15" fill="#c8c8c8" />
+          <rect x="46" y="1" width="13" height="8" rx="1" fill="#9e9e9e" stroke="#757575" stroke-width="0.5" />
+          <circle cx="49.5" cy="4.5" r="1.8" fill="#1a1a1a" />
+          <circle cx="55" cy="4.5" r="1.8" fill="#1a1a1a" />
+          <circle cx="49" cy="4" r="0.5" fill="#fff" />
+          <circle cx="54.5" cy="4" r="0.5" fill="#fff" />
+          <circle cx="52.5" cy="2" r="0.7" fill="#424242" />
         </svg>
       </div>
 
-      <!-- Rugged Jeep Wheels -->
+      <!-- Rover Wheels -->
       <div class="wheels">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85 15" width="100%" height="100%">
-          <!-- Rear Tire -->
-          <circle cx="20" cy="7.5" r="7" fill="#1a1a1a" stroke="#E0E0E0" stroke-width="0.5" />
-          <circle cx="20" cy="7.5" r="4" fill="#9E9E9E" />
-          <circle cx="20" cy="7.5" r="1.5" fill="#424242" />
-          <!-- Rear Tread Details -->
-          <path d="M 20 0.5 L 20 3" stroke="#1a1a1a" stroke-width="1" />
-          <path d="M 20 12 L 20 14.5" stroke="#1a1a1a" stroke-width="1" />
-          <path d="M 13 7.5 L 15 7.5" stroke="#1a1a1a" stroke-width="1" />
-          <path d="M 25 7.5 L 27 7.5" stroke="#1a1a1a" stroke-width="1" />
+          <g class="wheel">
+            <circle cx="15" cy="7.5" r="7" fill="#1a1a1a" stroke="#555" stroke-width="0.5" />
+            <circle cx="15" cy="7.5" r="4" fill="#8a8a8a" />
+            <circle cx="15" cy="7.5" r="1.6" fill="#424242" />
+            <g stroke="#6e6e6e" stroke-width="1">
+              <path d="M 15 0.5 L 15 3" />
+              <path d="M 15 12 L 15 14.5" />
+              <path d="M 8 7.5 L 10.5 7.5" />
+              <path d="M 19.5 7.5 L 22 7.5" />
+              <path d="M 10 2.6 L 12.2 4.7" />
+              <path d="M 20 2.6 L 17.8 4.7" />
+              <path d="M 10 12.4 L 12.2 10.3" />
+              <path d="M 20 12.4 L 17.8 10.3" />
+            </g>
+          </g>
 
-          <!-- Front Tire -->
-          <circle cx="65" cy="7.5" r="7" fill="#1a1a1a" stroke="#E0E0E0" stroke-width="0.5" />
-          <circle cx="65" cy="7.5" r="4" fill="#9E9E9E" />
-          <circle cx="65" cy="7.5" r="1.5" fill="#424242" />
-          <!-- Front Tread Details -->
-          <path d="M 65 0.5 L 65 3" stroke="#1a1a1a" stroke-width="1" />
-          <path d="M 65 12 L 65 14.5" stroke="#1a1a1a" stroke-width="1" />
-          <path d="M 58 7.5 L 60 7.5" stroke="#1a1a1a" stroke-width="1" />
-          <path d="M 70 7.5 L 72 7.5" stroke="#1a1a1a" stroke-width="1" />
+          <g class="wheel">
+            <circle cx="43" cy="7.5" r="7" fill="#1a1a1a" stroke="#555" stroke-width="0.5" />
+            <circle cx="43" cy="7.5" r="4" fill="#8a8a8a" />
+            <circle cx="43" cy="7.5" r="1.6" fill="#424242" />
+            <g stroke="#6e6e6e" stroke-width="1">
+              <path d="M 43 0.5 L 43 3" />
+              <path d="M 43 12 L 43 14.5" />
+              <path d="M 36 7.5 L 38.5 7.5" />
+              <path d="M 47.5 7.5 L 50 7.5" />
+              <path d="M 38 2.6 L 40.2 4.7" />
+              <path d="M 48 2.6 L 45.8 4.7" />
+              <path d="M 38 12.4 L 40.2 10.3" />
+              <path d="M 48 12.4 L 45.8 10.3" />
+            </g>
+          </g>
+
+          <g class="wheel">
+            <circle cx="71" cy="7.5" r="7" fill="#1a1a1a" stroke="#555" stroke-width="0.5" />
+            <circle cx="71" cy="7.5" r="4" fill="#8a8a8a" />
+            <circle cx="71" cy="7.5" r="1.6" fill="#424242" />
+            <g stroke="#6e6e6e" stroke-width="1">
+              <path d="M 71 0.5 L 71 3" />
+              <path d="M 71 12 L 71 14.5" />
+              <path d="M 64 7.5 L 66.5 7.5" />
+              <path d="M 75.5 7.5 L 78 7.5" />
+              <path d="M 66 2.6 L 68.2 4.7" />
+              <path d="M 76 2.6 L 73.8 4.7" />
+              <path d="M 66 12.4 L 68.2 10.3" />
+              <path d="M 76 12.4 L 73.8 10.3" />
+            </g>
+          </g>
         </svg>
       </div>
     </div>
