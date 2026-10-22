@@ -373,11 +373,21 @@
     .shooting-star,
     .shooting-star-2 {
       position: absolute;
-      background: linear-gradient(90deg, transparent, #fff);
       right: -100px;
       opacity: 0;
       border-radius: 2px;
-      box-shadow: 0 0 4px #fff;
+
+      /*
+        Fixed direction:
+        The star moves left, so the bright head must be on the left
+        and the tail must fade to the right.
+      */
+      background:
+        linear-gradient(90deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 255, 255, .82) 18%,
+          rgba(255, 255, 255, 0) 100%);
+      filter: drop-shadow(-2px 0 6px rgba(255, 255, 255, .45));
     }
 
     .shooting-star {
@@ -396,7 +406,6 @@
       transform: rotate(-40deg);
       animation: shoot2 16s linear infinite;
       animation-delay: 6s;
-      box-shadow: 0 0 3px #fff;
     }
 
     @keyframes shoot {
