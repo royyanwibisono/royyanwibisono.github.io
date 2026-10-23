@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/tunatech/static/css/main.26cc009b.css",
-    "main.js": "/tunatech/static/js/main.65798c91.js",
+    "main.css": "/tunatech/static/css/main.e018b535.css",
+    "main.js": "/tunatech/static/js/main.ebe07877.js",
     "static/media/satunol (4).png": "/tunatech/static/media/satunol (4).363dc7cab9628f21c2eb.png",
     "static/media/pama.png": "/tunatech/static/media/pama.63c5a30cedd708d38868.png",
     "static/media/sawit01.png": "/tunatech/static/media/sawit01.e3ce4ecd4defd950175d.png",
@@ -12,6 +12,7 @@
     "static/media/newssc.png": "/tunatech/static/media/newssc.c9374ce2ce3a88e06f22.png",
     "static/media/satunol (1).png": "/tunatech/static/media/satunol (1).79af9d22ce271dbe5eed.png",
     "static/media/satunol (3).png": "/tunatech/static/media/satunol (3).da713f7ec098896e9595.png",
+    "static/media/space_ship.png": "/tunatech/static/media/space_ship.e46e627361fca9034ca1.png",
     "static/media/tawafclock3.png": "/tunatech/static/media/tawafclock3.42fa009ff26e8f4c94b6.png",
     "static/media/tawafclock1.png": "/tunatech/static/media/tawafclock1.5ae45ca5271d99c0178f.png",
     "static/media/eltraingraph (1).png": "/tunatech/static/media/eltraingraph (1).689e17d5c84c61ed492f.png",
@@ -58,7 +59,7 @@
     "static/media/vite.svg": "/tunatech/static/media/vite.b30f410b464ac887c73c06e31add7f64.svg"
   },
   "entrypoints": [
-    "static/css/main.26cc009b.css",
-    "static/js/main.65798c91.js"
+    "static/css/main.e018b535.css",
+    "static/js/main.ebe07877.js"
   ]
 }
