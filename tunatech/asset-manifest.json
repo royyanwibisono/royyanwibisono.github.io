@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/tunatech/static/css/main.e018b535.css",
-    "main.js": "/tunatech/static/js/main.ebe07877.js",
+    "main.css": "/tunatech/static/css/main.fa82687b.css",
+    "main.js": "/tunatech/static/js/main.ef507dd3.js",
     "static/media/satunol (4).png": "/tunatech/static/media/satunol (4).363dc7cab9628f21c2eb.png",
     "static/media/pama.png": "/tunatech/static/media/pama.63c5a30cedd708d38868.png",
     "static/media/sawit01.png": "/tunatech/static/media/sawit01.e3ce4ecd4defd950175d.png",
@@ -59,7 +59,7 @@
     "static/media/vite.svg": "/tunatech/static/media/vite.b30f410b464ac887c73c06e31add7f64.svg"
   },
   "entrypoints": [
-    "static/css/main.e018b535.css",
-    "static/js/main.ebe07877.js"
+    "static/css/main.fa82687b.css",
+    "static/js/main.ef507dd3.js"
   ]
 }
